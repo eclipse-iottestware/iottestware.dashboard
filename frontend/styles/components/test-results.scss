@@ -1,0 +1,65 @@
+/********************************************************************************
+ * Copyright (c) 2019 Contributors to the Eclipse Foundation
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0
+ *
+ * SPDX-License-Identifier: EPL-2.0 4
+ ********************************************************************************/
+
+.test-results {
+  font-size: 0.9em;
+
+  // TODO: will miss in next release of primereact ?
+  //$headerBorderWidth: 1;
+  //$headerBorderColor: rgba(0,220,0,1);
+  //$headerBgColor: rgba(200,200,200,1);
+  //$headerFontWeight: 1em;
+
+  div {
+    .tdl-field {
+      border: $headerBorderWidth solid $headerBorderColor;
+
+      .pics-list {
+        padding-bottom: 0;
+      }
+    }
+
+    .tdl-label {
+      // TODO: get colors from color-scheme here!
+      background-color: $headerBgColor;
+      font-weight: $headerFontWeight;
+    }
+
+    .verdict-pass {
+      background-color: $verdict-color-pass;
+      font-weight: bold;
+      text-align: center;
+    }
+    .verdict-fail {
+      background-color: $verdict-color-fail;
+      font-weight: bold;
+      text-align: center;
+    }
+    .verdict-inconc {
+      background-color: $verdict-color-inconc;
+      font-weight: bold;
+      text-align: center;
+    }
+    .verdict-none {
+      background-color: $verdict-color-none;
+      font-weight: bold;
+      text-align: center;
+    }
+    .verdict-error {
+      background-color: $verdict-bg-color-error;
+      color: $verdict-fg-color-error;
+      font-weight: bold;
+      text-align: center;
+    }
+  }
+}

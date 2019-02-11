@@ -1,0 +1,143 @@
+{
+    "date": "2018-10-17_13-07-52",
+    "summary": [
+        {
+            "sut": "CoAPthon",
+            "version": "",
+            "statistic": {
+                "pass": 3,
+                "fail": 0,
+                "inconc": 21,
+                "none": 0,
+                "sum": 24
+            }
+        }
+    ],
+    "results": [
+        {
+            "sut": "CoAPthon",
+            "items": [
+                {
+                    "testcase": "TC_COAP_SERVER_001",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_HEADER_001",
+                    "verdict": "pass",
+                    "reason": null
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_HEADER_002",
+                    "verdict": "pass",
+                    "reason": null
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_HEADER_003",
+                    "verdict": "pass",
+                    "reason": null
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_GET_001",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_GET_002",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_GET_003",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_GET_005",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_POST_001",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_POST_002",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_POST_003",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_POST_005",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_PUT_001",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_PUT_002",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_DELETE_001",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_DELETE_002",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SEPERATE_RESPONSE_001",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SEPERATE_RESPONSE_002",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SEPERATE_RESPONSE_003",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SEPERATE_RESPONSE_004",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_NON_001",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_NON_002",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_NON_003",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                },
+                {
+                    "testcase": "TC_COAP_SERVER_NON_004",
+                    "verdict": "inconc",
+                    "reason": "Timer elapsed!"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+  "OPC-UA": [
+    {
+      "title": "OPC Foundation",
+      "link": "https://opcfoundation.org/",
+      "summary": "Official Website of the OPC Foundation"
+    },
+    {
+      "title": "Eclipse IoT-Testware: OPC-UA",
+      "link": "https://github.com/eclipse/iottestware.opcua",
+      "summary": "The official GitHub repository of the OPC-UA Test Suite"
+    }
+  ]
+}

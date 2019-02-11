@@ -1,0 +1,1312 @@
+{
+    "results": [
+        {
+            "sut": "Aedes",
+            "items": [
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_001",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_002",
+                    "reason": "IUT does not accept incorrect Protocol Names",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_003",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_004",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_005",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_006",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_007",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_008",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_009",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_010",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_011",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_012",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_013",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_015",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_017",
+                    "reason": "IUT accepts clientIds longer than 23 Bytes",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_018",
+                    "reason": "IUT accepts clientIds with special characters",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_019",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_020",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_021",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_001",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_002",
+                    "reason": "IUT accepted connection with clean session set to 1",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_004",
+                    "reason": "IUT had no present session to restore",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_005",
+                    "reason": "IUT closed the connection without preceding ACK with Return Code 0x01",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_008",
+                    "reason": "IUT does not require credentials",
+                    "verdict": "inconc"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBSCRIBE_001",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBSCRIBE_005",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBSCRIBE_007",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_001",
+                    "reason": "IUT answered correctly with SUBACK and correct header flags",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_004",
+                    "reason": "IUT answered correctly with SUBACK and return code 1",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_005",
+                    "reason": "IUT answered correctly with SUBACK and return code 2",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_006",
+                    "reason": "IUT seems not to implement Access restrictions for subscriptions",
+                    "verdict": "inconc"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBSCRIBE_001",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBSCRIBE_004",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBACK_001",
+                    "reason": "IUT answered correctly with UNSUBACK and correct header flags",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBACK_002",
+                    "reason": "IUT answered correctly with UNSUBACK and correct packet identifier",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_PINGREQ_001",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_PINGRESP_001",
+                    "reason": "IUT answered correctly to PINGREQ with PINGRESP",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_DISCONNECT_001",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_DISCONNECT_002",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_002",
+                    "reason": "IUT answered correctly with SUBACK and correct packet_identifier 15257",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_003",
+                    "reason": "IUT answered correctly with SUBACK and return code 0",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_022",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_023",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_003",
+                    "reason": "IUT does not restore present sessions",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_006",
+                    "reason": "IUT must reject the client ID with ACK and Return Code 0x02",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_014",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_016",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_024",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_025",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                }
+            ]
+        },
+        {
+            "sut": "Apache Apollo",
+            "items": [
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_001",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_002",
+                    "reason": "IUT does not accept incorrect Protocol Names",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_003",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_004",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_005",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_006",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_007",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_008",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_009",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_010",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_011",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_012",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_013",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_015",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_017",
+                    "reason": "IUT accepts clientIds longer than 23 Bytes",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_018",
+                    "reason": "IUT accepts clientIds with special characters",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_019",
+                    "reason": "IUT does not allow a client to supply a client identifier that has a length of zero bytes",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_020",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_021",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_001",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_002",
+                    "reason": "IUT accepted connection with clean session set to 1",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_004",
+                    "reason": "IUT rejects connections with CleanSession Flag set to 0",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_005",
+                    "reason": "IUT answered correctly with ACK and Return Code 0x01",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_008",
+                    "reason": "IUT does not require credentials",
+                    "verdict": "inconc"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBSCRIBE_001",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBSCRIBE_005",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBSCRIBE_007",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_001",
+                    "reason": "IUT answered correctly with SUBACK and correct header flags",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_004",
+                    "reason": "IUT answered correctly with SUBACK and return code 1",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_005",
+                    "reason": "IUT answered correctly with SUBACK and return code 2",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_006",
+                    "reason": "IUT seems not to implement Access restrictions for subscriptions",
+                    "verdict": "inconc"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBSCRIBE_001",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBSCRIBE_004",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBACK_001",
+                    "reason": "IUT answered correctly with UNSUBACK and correct header flags",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBACK_002",
+                    "reason": "IUT answered correctly with UNSUBACK and correct packet identifier",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_PINGREQ_001",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_PINGRESP_001",
+                    "reason": "IUT answered correctly to PINGREQ with PINGRESP",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_DISCONNECT_001",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_DISCONNECT_002",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_002",
+                    "reason": "IUT answered correctly with SUBACK and correct packet_identifier 39987",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_003",
+                    "reason": "IUT answered correctly with SUBACK and return code 0",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_022",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_023",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_003",
+                    "reason": "IUT does not restore present sessions and rejects such sessions",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_006",
+                    "reason": "IUT must reject the client ID with ACK and Return Code 0x02",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_014",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_016",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_024",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_025",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                }
+            ]
+        },
+        {
+            "sut": "Mosquitto",
+            "items": [
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_001",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_002",
+                    "reason": "IUT does not accept incorrect Protocol Names",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_003",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_004",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_005",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_006",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_007",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_008",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_009",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_010",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_011",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_012",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_013",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_015",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_017",
+                    "reason": "IUT accepts clientIds longer than 23 Bytes",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_018",
+                    "reason": "IUT accepts clientIds with special characters",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_019",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_020",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_021",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_001",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_002",
+                    "reason": "IUT accepted connection with clean session set to 1",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_004",
+                    "reason": "IUT had no present session to restore",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_005",
+                    "reason": "IUT answered correctly with ACK and Return Code 0x01",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_008",
+                    "reason": "IUT does not require credentials",
+                    "verdict": "inconc"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBSCRIBE_001",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBSCRIBE_005",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBSCRIBE_007",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_001",
+                    "reason": "IUT answered correctly with SUBACK and correct header flags",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_004",
+                    "reason": "IUT answered correctly with SUBACK and return code 1",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_005",
+                    "reason": "IUT answered correctly with SUBACK and return code 2",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_006",
+                    "reason": "IUT seems not to implement Access restrictions for subscriptions",
+                    "verdict": "inconc"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBSCRIBE_001",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBSCRIBE_004",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBACK_001",
+                    "reason": "IUT answered correctly with UNSUBACK and correct header flags",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBACK_002",
+                    "reason": "IUT answered correctly with UNSUBACK and correct packet identifier",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_PINGREQ_001",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_PINGRESP_001",
+                    "reason": "IUT answered correctly to PINGREQ with PINGRESP",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_DISCONNECT_001",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_DISCONNECT_002",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_002",
+                    "reason": "IUT answered correctly with SUBACK and correct packet_identifier 45520",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_003",
+                    "reason": "IUT answered correctly with SUBACK and return code 0",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_022",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_023",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_003",
+                    "reason": "IUT restored present session",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_006",
+                    "reason": "IUT answered correctly with ACK and return code 0x02",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_014",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_016",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_024",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_025",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                }
+            ]
+        },
+        {
+            "sut": "Apache ActiveMQ",
+            "items": [
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_001",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_002",
+                    "reason": "IUT does not accept incorrect Protocol Names",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_003",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_004",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_005",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_006",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_007",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_008",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_009",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_010",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_011",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_012",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_013",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_015",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_017",
+                    "reason": "IUT accepts clientIds longer than 23 Bytes",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_018",
+                    "reason": "IUT accepts clientIds with special characters",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_019",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_020",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_021",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_001",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_002",
+                    "reason": "IUT accepted connection with clean session set to 1",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_004",
+                    "reason": "IUT had no present session to restore",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_005",
+                    "reason": "IUT answered correctly with ACK and Return Code 0x01",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_008",
+                    "reason": "IUT does not require credentials",
+                    "verdict": "inconc"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBSCRIBE_001",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBSCRIBE_005",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBSCRIBE_007",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_001",
+                    "reason": "IUT answered correctly with SUBACK and correct header flags",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_004",
+                    "reason": "IUT answered correctly with SUBACK and return code 1",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_005",
+                    "reason": "IUT answered correctly with SUBACK and return code 2",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_006",
+                    "reason": "IUT seems not to implement Access restrictions for subscriptions",
+                    "verdict": "inconc"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBSCRIBE_001",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBSCRIBE_004",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBACK_001",
+                    "reason": "IUT answered correctly with UNSUBACK and correct header flags",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBACK_002",
+                    "reason": "IUT answered correctly with UNSUBACK and correct packet identifier",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_PINGREQ_001",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_PINGRESP_001",
+                    "reason": "IUT answered correctly to PINGREQ with PINGRESP",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_DISCONNECT_001",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_DISCONNECT_002",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_002",
+                    "reason": "IUT answered correctly with SUBACK and correct packet_identifier 52051",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_003",
+                    "reason": "IUT answered correctly with SUBACK and return code 0",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_022",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_023",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_003",
+                    "reason": "IUT does not restore present sessions",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_006",
+                    "reason": "IUT answered correctly with ACK and return code 0x02",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_014",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_016",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_024",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_025",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                }
+            ]
+        },
+        {
+            "sut": "Mosca",
+            "items": [
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_001",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_002",
+                    "reason": "{ timeoutEvent := 5.000000 }",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_003",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_004",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_005",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_006",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_007",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_008",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_009",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_010",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_011",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_012",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_013",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_015",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_017",
+                    "reason": "IUT accepts clientIds longer than 23 Bytes",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_018",
+                    "reason": "IUT accepts clientIds with special characters",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_019",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_020",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_021",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_001",
+                    "reason": "IUT answered correctly with ACK and return code 0x00",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_002",
+                    "reason": "IUT accepted connection with clean session set to 1",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_004",
+                    "reason": "IUT had no present session to restore",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_005",
+                    "reason": "IUT timed out after 5.000000s without any response",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_008",
+                    "reason": "IUT does not require credentials",
+                    "verdict": "inconc"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBSCRIBE_001",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBSCRIBE_005",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBSCRIBE_007",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_001",
+                    "reason": "IUT answered correctly with SUBACK and correct header flags",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_004",
+                    "reason": "IUT answered correctly with SUBACK and return code 1",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_005",
+                    "reason": "IUT granted QoS AT_LEAST_ONCE_DELIVERY (1) although EXACTLY_ONE_DELIVERY (2) was requested",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_006",
+                    "reason": "IUT seems not to implement Access restrictions for subscriptions",
+                    "verdict": "inconc"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBSCRIBE_001",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBSCRIBE_004",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBACK_001",
+                    "reason": "IUT answered correctly with UNSUBACK and correct header flags",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_UNSUBACK_002",
+                    "reason": "IUT answered correctly with UNSUBACK and correct packet identifier",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_PINGREQ_001",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_PINGRESP_001",
+                    "reason": "IUT answered correctly to PINGREQ with PINGRESP",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_DISCONNECT_001",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_DISCONNECT_002",
+                    "reason": "IUT closed the Network Connection correctly",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_002",
+                    "reason": "IUT answered correctly with SUBACK and correct packet_identifier 22909",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_SUBACK_003",
+                    "reason": "IUT answered correctly with SUBACK and return code 0",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_022",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_023",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_003",
+                    "reason": "IUT does not restore present sessions",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNACK_006",
+                    "reason": "IUT answered correctly with ACK and return code 0x02",
+                    "verdict": "pass"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_014",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_016",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_024",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                },
+                {
+                    "testcase": "TC_MQTT_BROKER_CONNECT_025",
+                    "reason": "IUT MUST close the Network Connection",
+                    "verdict": "fail"
+                }
+            ]
+        }
+    ],
+    "summary": [
+        {
+            "sut": "Mosquitto",
+            "version": "1.4.8",
+            "statistic": {
+                "pass": 40,
+                "inconc": 2,
+                "none": 0,
+                "fail": 7,
+                "sum": 49
+            }
+        },
+        {
+            "sut": "Apache ActiveMQ",
+            "version": "5.15.2",
+            "statistic": {
+                "pass": 32,
+                "inconc": 2,
+                "none": 0,
+                "fail": 15,
+                "sum": 49
+            }
+        },
+        {
+            "sut": "Aedes",
+            "version": "0.35.0",
+            "statistic": {
+                "pass": 29,
+                "inconc": 2,
+                "none": 0,
+                "fail": 18,
+                "sum": 49
+            }
+        },
+        {
+            "sut": "Apache Apollo",
+            "version": "1.7.1",
+            "statistic": {
+                "pass": 28,
+                "inconc": 2,
+                "none": 0,
+                "fail": 19,
+                "sum": 49
+            }
+        },
+        {
+            "sut": "Mosca",
+            "version": "2.8.2",
+            "statistic": {
+                "pass": 22,
+                "inconc": 2,
+                "none": 0,
+                "fail": 25,
+                "sum": 49
+            }
+        }
+    ],
+    "date": "2018-07-25_14-15-31"
+}

@@ -1,0 +1,52 @@
+{
+  "CoAP": [
+    {
+      "title": "RFC 7252 (CoAP)",
+      "link": "https://tools.ietf.org/html/rfc7252",
+      "summary": "Official RFC from IETF"
+    }, {
+    "title": "Eclipse Californium",
+    "link": "https://www.eclipse.org/californium/",
+    "summary": "Eclipse implementation"
+  }, {
+    "title": "Eclipse IoT-Testware: CoAP",
+    "link": "https://github.com/eclipse/iottestware.coap",
+    "summary": "The official GitHub repository of the CoAP Test Suite"
+  }, {
+    "title": "CoAP Plugtests 1: Guide",
+    "sub": "ETSI CTI Plugtests Guide First Draft V0.0.16 (2012-03)",
+    "link": "https://portal.etsi.org/cti/downloads/TestSpecifications/CoAP_IOT_TestSpecification_v016_20120321.pdf",
+    "summary": "ETSI CTI Guide for achieving interoperability"
+  }, {
+    "title": "CoAP Plugtests 1: Report",
+    "sub": "ETSI CTI Plugtest Report 1.1.1 (2012-03)",
+    "link": "https://portal.etsi.org/Portals/0/TBpages/CTI/Docs/CoAP_Plugtest_1_TR_2012.pdf",
+    "summary": "The 1st CoAP Plugtest was held from 24 to 25 March 2012 in Paris, France and was co-located with IETF#83. \nThis event was jointly organized by ETSI, IPSO Alliance and the FP7 Probe-IT project1."
+  }, {
+    "title": "CoAP Plugtests 2: Guide",
+    "sub": "ETSI CTI Plugtests Guide Draft V0.0.13 (2012-11)",
+    "link": "https://portal.etsi.org/cti/downloads/TestSpecifications/CoAP_2_Plugtests_TestDescriptions_v013.pdf",
+    "summary": "ETSI CTI Guide for achieving interoperability"
+  }, {
+    "title": "CoAP Plugtests 2: Report",
+    "sub": "ETSI CTI Plugtest Report 1.0.0 (2013-01)",
+    "link": "https://portal.etsi.org/Portals/0/TBpages/CTI/Docs/CoAP2_2012_Technical_Report.pdf",
+    "summary": "The CoAP#2 Plugtest was held from 28 to 30 November 2012 in Sophia-Antipolis. This event was jointly organized by ETSI, IPSO Alliance and the FP7 Probe-IT project. "
+  }, {
+    "title": "CoAP and OMA LWM2M Plugtests 3: Guide",
+    "sub": "ETSI CTI Plugtests Guide Draft V0.0.5 (2013-11)",
+    "link": "https://portal.etsi.org/cti/downloads/TestSpecifications/IoT_CoAP_3_Plugtests_TestDescriptions_v005.pdf",
+    "summary": "CoAP#3 and OMA Lightweight M2M Plugtests"
+  }, {
+    "title": "CoAP and OMA LWM2M CoAP Plugtests 3: Report",
+    "sub": "ETSI CTI Plugtest Report 1.0.0 (2013-12)",
+    "link": "hhttps://portal.etsi.org/Portals/0/TBpages/CTI/Docs/CoAP3_LWM2M_Plugtest_TestReport_v1.0.pdf",
+    "summary": "CoAP#3 and OMA Lightweight M2M Plugtests"
+  }, {
+    "title": "CoAP Binding of ETSI M2M Primitives",
+    "sub": "ETSI TS 103 104 V1.1.1 (2013-04)",
+    "link": "https://www.etsi.org/deliver/etsi_ts/103100_103199/103104/01.01.01_60/ts_103104v010101p.pdf",
+    "summary": "Interoperability Test Specification for CoAP Binding of ETSI M2M Primitives "
+  }
+  ]
+}

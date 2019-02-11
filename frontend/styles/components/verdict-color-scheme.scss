@@ -1,0 +1,20 @@
+/********************************************************************************
+ * Copyright (c) 2019 Contributors to the Eclipse Foundation
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0
+ *
+ * SPDX-License-Identifier: EPL-2.0 4
+ ********************************************************************************/
+
+/* color schemes for verdicts: */
+$verdict-color-pass: rgba(0,220,0,1);
+$verdict-color-fail: rgba(220,0,0,1);
+$verdict-color-inconc: rgba(255,200,0,1);
+$verdict-color-none: rgba(200,200,200,0.6);
+$verdict-bg-color-error: rgba(235,160,150,1);
+$verdict-fg-color-error: rgba(180,25,25,.6)

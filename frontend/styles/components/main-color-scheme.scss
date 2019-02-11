@@ -1,0 +1,19 @@
+/********************************************************************************
+ * Copyright (c) 2019 Contributors to the Eclipse Foundation
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0
+ *
+ * SPDX-License-Identifier: EPL-2.0 4
+ ********************************************************************************/
+
+// Node: use this file to define an own color-scheme and override stylings coming from built-in theme
+$headerTextColor: rgba(50,50,50,1);
+$stateActiveTextColor: rgba(10,10,10,1);
+
+$stateActiveBgColor: rgba(50,150,250,0.5);
+$stateDefaultBgColor: rgba(50,150,250,1);

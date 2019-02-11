@@ -1,0 +1,395 @@
+{
+    "meta": {},
+    "tps": {
+        "TP_COAP_MESSAGEFORMAT_HEADER_001": {
+            "id": "TP_CoAP_MessageFormat_Header_001",
+            "objective": "The IUT ignores a correct CoAP ReSeT message, including correct version number, type, token length , code and message id.",
+            "reference": "RFC7252#section-3,",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tversion indicating value 1, \n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_MESSAGEFORMAT_HEADER_002": {
+            "id": "TP_CoAP_MessageFormat_Header_002",
+            "objective": "The IUT ignores on an incorrect CoAP message header.",
+            "reference": "RFC7252#section-3,",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tversion indicating value 3,\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\ttoken_length indicating value 0,\n\t\t\tcode indicating value 0.00, /* EMPTY */\n\t\t\ttoken indicating value 0;\n\t\t }\n\t\t then {\n\t\t\tthe client entity times_out /* 2s ACK_TIMEOUT */\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_MESSAGEFORMAT_HEADER_003": {
+            "id": "TP_CoAP_MessageFormat_Header_003",
+            "objective": "The IUT ignores on an incorrect CoAP message header.",
+            "reference": "RFC7252#section-3,",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tversion indicating value 1,\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\ttoken_length indicating value 9, /* reserved */\n\t\t\tcode indicating value 0.00, /* EMPTY */\n\t\t\ttoken indicating value 0;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends no message and\n\t\t\tthe client entity times_out /* 2s ACK_TIMEOUT */\n\t\t\t// TODO: check message format error\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_001": {
+            "id": "TP_CoAP_Server_001",
+            "objective": "The IUT is responding on a PING message.",
+            "reference": "RFC7252#section4.2,",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.00;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 3; /* ReSeT */\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_GET_001": {
+            "id": "TP_CoAP_Server_GET_001",
+            "objective": "The IUT is responding with code 2.05 on a GET request.",
+            "reference": "RFC7252#section-5.8.1, https://tools.ietf.org/html/rfc7252#section-5.8.1",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named Simple_Resource\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.01,\n\t\t\turi_path corresponding to DEFAULT_RESOURCE;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\tcode indicating value 2.05;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_GET_002": {
+            "id": "TP_CoAP_Server_GET_002",
+            "objective": "The IUT is responding with code 2.05 on a GET request.",
+            "reference": "RFC7252#section-5.8.1, https://tools.ietf.org/html/rfc7252#section-5.8.1",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named Simple_Resource/New_Resource\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.01,\n\t\t\turi_path corresponding to DEFAULT_RESOURCE,\n\t\t\turi_path corresponding to NEW_RESOURCE;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\tcode indicating value 2.05;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_GET_003": {
+            "id": "TP_CoAP_Server_GET_003",
+            "objective": "The IUT is responding with code 4.05 on a GET request.",
+            "reference": "RFC7252#section-5.8.1, https://tools.ietf.org/html/rfc7252#section-5.8.1",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named Simple_Resource and must not implement the GET operation\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.01,\n\t\t\turi_path corresponding to DEFAULT_RESOURCE;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\tcode indicating value 4.05;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_GET_004": {
+            "id": "TP_CoAP_Server_GET_004",
+            "objective": "The IUT is responding with code 4.04 on a GET request.",
+            "reference": "RFC7252#section-5.8.1, https://tools.ietf.org/html/rfc7252#section-5.8.1",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must not provide a resource named Simple_Resource\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.01,\n\t\t\turi_path corresponding to DEFAULT_RESOURCE;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\tcode indicating value 4.04;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_POST_001": {
+            "id": "TP_CoAP_Server_POST_001",
+            "objective": "The IUT is responding with code 2.01 on a POST request.",
+            "reference": "RFC7252#section-5.8.2, https://tools.ietf.org/html/rfc7252#section-5.8.2",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named Storage_Resource\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.02,\n\t\t\turi_path corresponding to STORAGE_RESOURCE,\n\t\t\tpayload indicating value 116 145 167 061 057 116 145 167 062;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\tcode indicating value 2.01,\n\t\t\tLocationPath corresponding to SECOND_LVL_RESOURCE,\n\t\t\tLocationPath corresponding to THIRD_LVL_RESOURCE;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_POST_002": {
+            "id": "TP_CoAP_Server_POST_002",
+            "objective": "The IUT is responding with code 2.04 on a POST request.",
+            "reference": "RFC7252#section-5.8.2, https://tools.ietf.org/html/rfc7252#section-5.8.2",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named Storage_Resource/New1/New2\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.02,\n\t\t\turi_path corresponding to STORAGE_RESOURCE,\n\t\t\turi_path corresponding to SECOND_LVL_RESOURCE,\n\t\t\turi_path corresponding to THIRD_LVL_RESOURCE,\n\t\t\tpayload indicating value 116 145 167 061 057 116 145 167 062;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\tcode indicating value 2.04,\n\t\t\tLocationPath corresponding to SECOND_LVL_RESOURCE,\n\t\t\tLocationPath corresponding to THIRD_LVL_RESOURCE;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_POST_003": {
+            "id": "TP_CoAP_Server_POST_003",
+            "objective": "The IUT is responding with code 2.04 on a POST request.",
+            "reference": "RFC7252#section-5.8.2, https://tools.ietf.org/html/rfc7252#section-5.8.2",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named Storage_Resource/New1/New2\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.02,\n\t\t\turi_path corresponding to STORAGE_RESOURCE,\n\t\t\turi_path corresponding to SECOND_LVL_RESOURCE,\n\t\t\turi_path corresponding to NEW_RESOURCE,\n\t\t\tpayload indicating value 116 145 167 061 057 116 145 167 062;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\tcode indicating value 2.04,\n\t\t\tLocationPath corresponding to SECOND_LVL_RESOURCE,\n\t\t\tLocationPath corresponding to NEW_RESOURCE;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_POST_004": {
+            "id": "TP_CoAP_Server_POST_004",
+            "objective": "The IUT is responding with code 4.05 on a POST request.",
+            "reference": "RFC7252#section-5.8.2, https://tools.ietf.org/html/rfc7252#section-5.8.2",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named Simple_Resource and must not implement the POST operation\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.02,\n\t\t\turi_path corresponding to DEFAULT_RESOURCE;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\tcode indicating value 4.05;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_PUT_001": {
+            "id": "TP_CoAP_Server_PUT_001",
+            "objective": "The IUT is responding with code 2.01 on a PUT request.",
+            "reference": "RFC7252#section-5.8.3, https://tools.ietf.org/html/rfc7252#section-5.8.3",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named Storage_Resource\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.03,\n\t\t\turi_path corresponding to STORAGE_RESOURCE,\n\t\t\tpayload indicating value 116 145 167 061 057 116 145 167 062;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\tcode indicating value 2.01,\n\t\t\tLocationPath corresponding to SECOND_LVL_RESOURCE;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_PUT_002": {
+            "id": "TP_CoAP_Server_PUT_002",
+            "objective": "The IUT is responding with code 2.04 on a PUT request.",
+            "reference": "RFC7252#section-5.8.3, https://tools.ietf.org/html/rfc7252#section-5.8.3",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named Storage_Resource/New1\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.03,\n\t\t\turi_path corresponding to STORAGE_RESOURCE,\n\t\t\turi_path corresponding to SECOND_LVL_RESOURCE;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\tcode indicating value 2.04,\n\t\t\tLocationPath corresponding to SECOND_LVL_RESOURCE; /*Try to add resource New1 although it already exists. */\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_DELETE_001": {
+            "id": "TP_CoAP_Server_DELETE_001",
+            "objective": "The IUT is responding with code 2.02 on a DELETE request.",
+            "reference": "RFC7252#section-5.8.4, https://tools.ietf.org/html/rfc7252#section-5.8.4",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named Storage_Resource\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.04,\n\t\t\turi_path corresponding to STORAGE_RESOURCE;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\tcode indicating value 2.02;\t/*Delete resource Resource \u201cStorage_Resource\u201d. */\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_DELETE_002": {
+            "id": "TP_CoAP_Server_DELETE_002",
+            "objective": "The IUT is responding with code 2.02 on a DELETE request.",
+            "reference": "RFC7252#section-5.8.4, https://tools.ietf.org/html/rfc7252#section-5.8.4",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must not provide a resource named Storage_Resource\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.04,\n\t\t\turi_path corresponding to STORAGE_RESOURCE;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\tcode indicating value 2.02;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_NON_001": {
+            "id": "TP_CoAP_Server_NON_001",
+            "objective": "The IUT is responding with code 2.05 on a NON-confirmable GET request.",
+            "reference": "RFC7252#section-5.2.3, https://tools.ietf.org/html/rfc7252#section-5.2.3",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named Simple_Resource\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 1, /* NON-confirmable */\n\t\t\tcode indicating value 0.01,\n\t\t\turi_path corresponding to DEFAULT_RESOURCE;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 1, /* NON-confirmable */\n\t\t\tcode indicating value 2.05;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_NON_002": {
+            "id": "TP_CoAP_Server_NON_002",
+            "objective": "The IUT is responding with code 2.01 on a NON-confirmable POST request.",
+            "reference": "RFC7252#section-5.2.3, https://tools.ietf.org/html/rfc7252#section-5.2.3",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named Storage_Resource\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 1, /* NON-confirmable */\n\t\t\tcode indicating value 0.02,\n\t\t\turi_path corresponding to STORAGE_RESOURCE,\n\t\t\tpayload indicating value 116 145 167 061 057 116 145 167 062;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 1, /* NON-confirmable */\n\t\t\tcode indicating value 2.01,\n\t\t\tLocationPath corresponding to SECOND_LVL_RESOURCE,\n\t\t\tLocationPath corresponding to THIRD_LVL_RESOURCE;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_NON_003": {
+            "id": "TP_CoAP_Server_NON_003",
+            "objective": "The IUT is responding with code 2.01 on a NON-confirmable PUT request.",
+            "reference": "RFC7252#section-5.2.3, https://tools.ietf.org/html/rfc7252#section-5.2.3",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named Storage_Resource\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 1, /* NON-confirmable */\n\t\t\tcode indicating value 0.03,\n\t\t\turi_path corresponding to STORAGE_RESOURCE,\n\t\t\tpayload indicating value 116 145 167 061 057 116 145 167 062;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 1, /* NON-confirmable */\n\t\t\tcode indicating value 2.01,\n\t\t\tLocationPath corresponding to SECOND_LVL_RESOURCE;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_NON_004": {
+            "id": "TP_CoAP_Server_NON_004",
+            "objective": "The IUT is responding with code 2.02 on a DELETE request.",
+            "reference": "RFC7252#section-5.2.3, https://tools.ietf.org/html/rfc7252#section-5.2.3",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named Storage_Resource\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 1, /* NON-confirmable */\n\t\t\tcode indicating value 0.04,\n\t\t\turi_path corresponding to STORAGE_RESOURCE;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity sends the message containing\n\t\t\tmsg_type indicating value 1, /* NON-confirmable */\n\t\t\tcode indicating value 2.02;\t/* Delete resource Resource \u201cStorage_Resource\u201d. */\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_SEPARATE_RESPONSE_GET_001": {
+            "id": "TP_CoAP_Server_Separate_Response_GET_001",
+            "objective": "The IUT is responding with code 2.05 on a GET request.",
+            "reference": "RFC7252#section-5.8.4, https://tools.ietf.org/html/rfc7252#section-5.8.4",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named separate\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.01,\n\t\t\turi_path corresponding to SEPARATE_RESOURCE;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity first sends an empty message and\n\t\t\tthe IUT entity sends the second message containing\n\t\t\tmsg_type indicating value 0.00, /* Confirmable */\n\t\t\tcode indicating value 2.01;\n\t\t\tand\n\t\t\tthe client entity sends an empty message containing\n\t\t\tmsg_type indicating value 2.00, /* Acknowledgement */\n\t\t\tcode indicating value 0.00;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_SEPARATE_RESPONSE_POST_001": {
+            "id": "TP_CoAP_Server_Separate_Response_POST_001",
+            "objective": "The IUT is responding with Confirmable and code 2.01 on a POST request.",
+            "reference": "RFC7252#section-5.8.2, https://tools.ietf.org/html/rfc7252#section-5.8.4",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named separate\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.02,\n\t\t\turi_path corresponding to SEPARATE_RESOURCE,\n\t\t\tpayload indicating value 116 145 167 061 057 116 145 167 062;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity first sends an empty message and\n\t\t\tthe IUT entity sends the second message containing\n\t\t\tmsg_type indicating value 0.00, /* Confirmable */\n\t\t\tcode indicating value 2.01;\n\t\t\tand\n\t\t\tthe client entity sends an empty message containing\n\t\t\tmsg_type indicating value 2.00, /* Acknowledgement */\n\t\t\tcode indicating value 0.00;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_SEPARATE_RESPONSE_POST_002": {
+            "id": "TP_CoAP_Server_Separate_Response_POST_002",
+            "objective": "The IUT is responding with code 2.04 on a GET request.",
+            "reference": "RFC7252#section-5.8.4, https://tools.ietf.org/html/rfc7252#section-5.8.4",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named separate/new1/new2\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.02,\n\t\t\turi_path corresponding to SEPARATE_RESOURCE,\n\t\t\turi_path corresponding to SECOND_LVL_RESOURCE,\n\t\t\turi_path corresponding to THIRD_LVL_RESOURCE,\n\t\t\tpayload indicating value 116 145 167 061 057 116 145 167 062;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity first sends an empty message and\n\t\t\tthe IUT entity sends the second message containing\n\t\t\tmsg_type indicating value 0.00, /* Confirmable */\n\t\t\tcode indicating value 2.04,\n\t\t\tLocation_Path corresponding to SECOND_LVL_RESOURCE,\n\t\t\tLocation_Path corresponding to THIRD_LVL_RESOURCE; /*Try to add two new resources named New1 and New2 which already exist.*/\n\t\t\tand\n\t\t\tthe client entity sends an empty message containing\n\t\t\tmsg_type indicating value 2.00, /* Acknowledgement */\n\t\t\tcode indicating value 0.00;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_SEPARATE_RESPONSE_POST_003": {
+            "id": "TP_CoAP_Server_Separate_Response_POST_003",
+            "objective": "The IUT is responding with code 2.04 on a GET request.",
+            "reference": "RFC7252#section-5.8.4, https://tools.ietf.org/html/rfc7252#section-5.8.4",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named separate/new1/new2\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.02,\n\t\t\turi_path corresponding to SEPARATE_RESOURCE,\n\t\t\turi_path corresponding to SECOND_LVL_RESOURCE,\n\t\t\turi_path corresponding to NEW_RESOURCE,\n\t\t\tpayload indicating value 116 145 167 061 057 116 145 167 062;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity first sends an empty message and\n\t\t\tthe IUT entity sends the second message containing\n\t\t\tmsg_type indicating value 0.00, /* Confirmable */\n\t\t\tcode indicating value 2.04,\n\t\t\tLocation_Path corresponding to SECOND_LVL_RESOURCE,\n\t\t\tLocation_Path corresponding to NEW_RESOURCE; /*Change resource separate/New1/New2 to separate/New1/New1a.*/\n\t\t\tand\n\t\t\tthe client entity sends an empty message containing\n\t\t\tmsg_type indicating value 2.00, /* Acknowledgement */\n\t\t\tcode indicating value 0.00;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_SEPARATE_RESPONSE_POST_004": {
+            "id": "TP_CoAP_Server_Separate_Response_POST_004",
+            "objective": "The IUT is responding with code 4.05 on a GET request.",
+            "reference": "RFC7252#section-5.8.4, https://tools.ietf.org/html/rfc7252#section-5.8.4",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named separate and must not implement the POST operation\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.02,\n\t\t\turi_path corresponding to SEPARATE_RESOURCE;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity first sends an empty message and\n\t\t\tthe IUT entity sends the second message containing\n\t\t\tmsg_type indicating value 0.00, /* Confirmable */\n\t\t\tcode indicating value 4.05;\n\t\t\tand\n\t\t\tthe client entity sends an empty message containing\n\t\t\tmsg_type indicating value 2.00, /* Acknowledgement */\n\t\t\tcode indicating value 0.00;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_SEPARATE_RESPONSE_PUT_001": {
+            "id": "TP_CoAP_Server_Separate_Response_PUT_001",
+            "objective": "The IUT is responding with code 2.01 on a PUT request.",
+            "reference": "RFC7252#section-5.8.3, https://tools.ietf.org/html/rfc7252#section-5.8.3",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named separate\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.03,\n\t\t\turi_path corresponding to SEPARATE_RESOURCE,\n\t\t\tpayload indicating value 116 145 167 061 057;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity first sends an empty message and\n\t\t\tthe IUT entity sends the second message containing\n\t\t\tmsg_type indicating value 0.00, /* Confirmable */\n\t\t\tcode indicating value 2.01,\n\t\t\tLocation_Path corresponding to SECOND_LVL_RESOURCE;\n\t\t\tand\n\t\t\tthe client entity sends an empty message containing\n\t\t\tmsg_type indicating value 2.00, /* Acknowledgement */\n\t\t\tcode indicating value 0.00;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_SEPARATE_RESPONSE_PUT_002": {
+            "id": "TP_CoAP_Server_Separate_Response_PUT_002",
+            "objective": "The IUT is responding with code 2.04 on a PUT request.",
+            "reference": "RFC7252#section-5.8.3, https://tools.ietf.org/html/rfc7252#section-5.8.3",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named separate/new1\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.03,\n\t\t\turi_path corresponding to SEPARATE_RESOURCE,\n\t\t\turi_path corresponding to SECOND_LVL_RESOURCE;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity first sends an empty message and\n\t\t\tthe IUT entity sends the second message containing\n\t\t\tmsg_type indicating value 0.00, /* Confirmable */\n\t\t\tcode indicating value 2.04; /*Try to add resource New1 although it already exists */\n\t\t\tand\n\t\t\tthe client entity sends an empty message containing\n\t\t\tmsg_type indicating value 2.00, /* Acknowledgement */\n\t\t\tcode indicating value 0.00;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_SEPARATE_RESPONSE_DELETE_001": {
+            "id": "TP_CoAP_Server_Separate_Response_DELETE_001",
+            "objective": "The IUT is responding with code 2.02 on a DELETE request.",
+            "reference": "RFC7252#section-5.8.4, https://tools.ietf.org/html/rfc7252#section-5.8.4",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must provide a resource named separate\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.04,\n\t\t\turi_path corresponding to SEPARATE_RESOURCE;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity first sends an empty message and\n\t\t\tthe IUT entity sends the second message containing\n\t\t\tmsg_type indicating value 0.00, /* Confirmable */\n\t\t\tcode indicating value 2.02,\n\t\t\tLocation_Path corresponding to SECOND_LVL_RESOURCE; /*Delete resource Separate */\n\t\t\tand\n\t\t\tthe client entity sends an empty message containing\n\t\t\tmsg_type indicating value 2.00, /* Acknowledgement */\n\t\t\tcode indicating value 0.00;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_SERVER_SEPARATE_RESPONSE_DELETE_002": {
+            "id": "TP_CoAP_Server_Separate_Response_DELETE_002",
+            "objective": "The IUT is responding with code 2.02 on a DELETE request.",
+            "reference": "RFC7252#section-5.8.4, https://tools.ietf.org/html/rfc7252#section-5.8.4",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t the IUT entity must not provide a resource named separate\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t when {\n\t\t\tthe IUT entity receives a message containing\n\t\t\tmsg_type indicating value 0, /* CONfirmable */\n\t\t\tcode indicating value 0.04,\n\t\t\turi_path corresponding to SEPARATE_RESOURCE;\n\t\t }\n\t\t then {\n\t\t\tthe IUT entity first sends an empty message and\n\t\t\tthe IUT entity sends the second message containing\n\t\t\tmsg_type indicating value 0.00, /* Confirmable */\n\t\t\tcode indicating value 2.02,\n\t\t\tLocation_Path corresponding to SECOND_LVL_RESOURCE; /*Get Response code 2.02 although the requested resource does not exist*/\n\t\t\tand\n\t\t\tthe client entity sends an empty message containing\n\t\t\tmsg_type indicating value 2.00, /* Acknowledgement */\n\t\t\tcode indicating value 0.00;\n\t\t }\n\t\t}\n\t"
+        },
+        "TP_COAP_OPTIONS_COAP_URI": {
+            "id": "TP_CoAP_Options_Coap_Uri",
+            "objective": "The Uri-Host Option specifies the Internet host of the resource",
+            "reference": "RFC7252#section5.10,",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t\tthe IUT entity must provide a resource named coap_URI\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t\twhen {\n\t\t\t\tthe IUT entity receives a message containing\n\t\t\t\tmsg_option indicating value 0, /* CONfirmable */\n\t\t\t\tcode indicating value 0.01,\n\t\t\t\thost corresponding to DEFAULT_HOST, /*default eg. [2001:db8::2:1] */\n\t\t\t\tport corresponding to DEFAULT_PORT; /*default eg. 5683 */\n\t\t\t\t}\n\t\t\tthen {\n\t\t\t\tthe IUT entity sends the message containing\n\t\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\t\tcode indicating value 2.05,\n\t\t\t\tcontent indicating value coap_URI;\n\t\t\t\t}\n\t\t\t}\n\t"
+        },
+        "TP_COAP_OPTIONS_URI_HOST": {
+            "id": "TP_CoAP_Options_Uri_Host",
+            "objective": "The Uri-Host Option specifies the Internet host of the resource",
+            "reference": "RFC7252#section5.10,",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t\tthe IUT entity must provide a resource named coap_URI\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t\twhen {\n\t\t\t\tthe IUT entity receives a message containing\n\t\t\t\tmsg_option indicating value 0, /* CONfirmable */\n\t\t\t\tcode indicating value 0.01,\n\t\t\t\thost corresponding to DEFAULT_HOST, /*default eg. [2001:db8::2:1] */\n\t\t\t\tport corresponding to DEFAULT_PORT, /*default eg. 5683 */\n\t\t\t\toption_delta indicating value 3, /*URI-Host */\n\t\t\t\toption_value indicating value \"example.net\";\n\t\t\t\t}\n\t\t\tthen {\n\t\t\t\tthe IUT entity sends the message containing\n\t\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\t\tcode indicating value 2.05,\n\t\t\t\tcontent indicating value coap_URI;\n\t\t\t\t}\n\t\t\t}\n\t"
+        },
+        "TP_COAP_OPTIONS_URI_PATH": {
+            "id": "TP_CoAP_Options_Uri_Path",
+            "objective": "The Uri-Path Option specifies one segment of the absolute path to",
+            "reference": "RFC7252#section5.10,",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t\tthe IUT entity must provide a resource named coap_URI\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t\twhen {\n\t\t\t\tthe IUT entity receives a message containing\n\t\t\t\tmsg_option indicating value 0, /* CONfirmable */\n\t\t\t\tcode indicating value 0.01,\n\t\t\t\thost corresponding to DEFAULT_HOST, /*default eg. [2001:db8::2:1] */\n\t\t\t\tport corresponding to DEFAULT_PORT, /*default eg. 5683 */\n\t\t\t\toption_delta indicating value 3, /*URI-Host */\n\t\t\t\toption_value indicating value \"example.net\",\n\t\t\t\toption_delta indicating value 8, /*URI-Path */\n\t\t\t\toption_value indicating value \".well-known\",\n\t\t\t\toption_delta indicating value 3, /*URI-Path */\n\t\t\t\toption_value indicating value \"core\";\n\t\t\t\t}\n\t\t\tthen {\n\t\t\t\tthe IUT entity sends the message containing\n\t\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\t\tcode indicating value 2.05,\n\t\t\t\tcontent indicating value coap_URI;\n\t\t\t\t}\n\t\t\t}\n\t"
+        },
+        "TP_COAP_OPTIONS_URI_QUERY": {
+            "id": "TP_CoAP_Options_Uri_Query",
+            "objective": "The Uri-Query Option specifies one argument parameterizing the",
+            "reference": "RFC7252#section5.10,",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t\tthe IUT entity must provide a resource named coap_URI\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t\twhen {\n\t\t\t\tthe IUT entity receives a message containing\n\t\t\t\tmsg_option indicating value 0, /* CONfirmable */\n\t\t\t\tcode indicating value 0.01,\n\t\t\t\thost corresponding to DEFAULT_HOST, /*default eg. [2001:db8::2:1] */\n\t\t\t\tport corresponding to DEFAULT_PORT, /*default eg. 5683 */\n\t\t\t\toption_delta indicating value 11, /*URI-Path */\n\t\t\t\toption_value indicating value \"\",\n\t\t\t\toption_delta indicating value 0, /*URI-Path */\n\t\t\t\toption_value indicating value \"/\",\n\t\t\t\toption_delta indicating value 11, /*URI-Path */\n\t\t\t\toption_value indicating value \"\",\n\t\t\t\toption_delta indicating value 0, /*URI-Path */\n\t\t\t\toption_value indicating value \"\",\n\t\t\t\toption_delta indicating value 15, /*URI-Query */\n\t\t\t\toption_value indicating value \"//\",\n\t\t\t\toption_delta indicating value 0, /*URI-Query */\n\t\t\t\toption_value indicating value \"?&\";\n\t\t\t\t}\n\t\t\tthen {\n\t\t\t\tthe IUT entity sends the message containing\n\t\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\t\tcode indicating value 2.05,\n\t\t\t\tcontent indicating value coap_URI;\n\t\t\t\t}\n\t\t\t}\n\t"
+        },
+        "TP_COAP_OPTIONS_PROXY_URI": {
+            "id": "TP_CoAP_Options_Proxy_Uri",
+            "objective": "The Proxy-Uri Option is used to make a request to a forward-proxy",
+            "reference": "RFC7252#section5.10,",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t\tthe IUT entity must provide a resource named coap_URI\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t\twhen {\n\t\t\t\tthe IUT entity receives a message containing\n\t\t\t\tmsg_option indicating value 0, /* CONfirmable */\n\t\t\t\tcode indicating value 0.01,\n\t\t\t\tproxy_uri corresponding to PROXY_URI;\n\t\t\t\t}\n\t\t\tthen {\n\t\t\t\tthe IUT entity sends the message containing\n\t\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\t\tcode indicating value 2.05;\n\t\t\t\t}\n\t\t\t}\n\t"
+        },
+        "TP_COAP_OPTIONS_PROXY_URI_FAIL": {
+            "id": "TP_CoAP_Options_Proxy_Uri_Fail",
+            "objective": "The Proxy-Uri Option MUST take precedence over any of the Uri-Host,",
+            "reference": "RFC7252#section5.10,",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t\tthe IUT entity must provide a resource named coap_URI\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t\twhen {\n\t\t\t\tthe IUT entity receives a message containing\n\t\t\t\tmsg_option indicating value 0, /* CONfirmable */\n\t\t\t\tcode indicating value 0.01,\n\t\t\t\tproxy_uri corresponding to PROXY_URI,\n\t\t\t\turi_host corresponding to URI_HOST;\n\t\t\t\t}\n\t\t\tthen {\n\t\t\t\tthe IUT entity sends the message containing\n\t\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\t\tcode indicating value 4.05;\n\t\t\t\t }\n\t\t\t}\n\t"
+        },
+        "TP_COAP_OPTIONS_CONTENT_FORMAT": {
+            "id": "TP_CoAP_Options_Content_Format",
+            "objective": "The Content-Format Option indicates the representation format of the",
+            "reference": "RFC7252#section5.10,",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t\tthe IUT entity must provide a resource named coap_URI\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t\twhen {\n\t\t\t\tthe IUT entity receives a message containing\n\t\t\t\tmsg_option indicating value 0, /* CONfirmable */\n\t\t\t\tcode indicating value 0.01,\n\t\t\t\tcontent_format indicating value content_formats_id,\n\t\t\t\tpayload indicating value 116 145 167 061 057 116 145 167 062;\n\t\t\t\t}\n\t\t\tthen {\n\t\t\t\tthe IUT entity sends the message containing\n\t\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\t\tcode indicating value 2.03;\n\t\t\t\t }\n\t\t\t}\n\t"
+        },
+        "TP_COAP_OPTIONS_CONTENT_FORMAT_FAIL": {
+            "id": "TP_CoAP_Options_Content_Format_Fail",
+            "objective": "The Content-Format Option indicates the representation format of the",
+            "reference": "RFC7252#section5.10,",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t\tthe IUT entity must provide a resource named coap_URI\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t\twhen {\n\t\t\t\tthe IUT entity receives a message containing\n\t\t\t\tmsg_option indicating value 0, /* CONfirmable */\n\t\t\t\tcode indicating value 0.01,\n\t\t\t\tpayload indicating value 116 145 167 061 057 116 145 167 062;\n\t\t\t\t}\n\t\t\tthen {\n\t\t\t\tthe IUT entity sends the message containing\n\t\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\t\tcode indicating value 4.06;\n\t\t\t\t }\n\t\t\t}\n\t"
+        },
+        "TP_COAP_OPTIONS_CONTENT_ACCEPT": {
+            "id": "TP_CoAP_Options_Content_Accept",
+            "objective": "The CoAP Accept option can be used to indicate which Content-Format",
+            "reference": "RFC7252#section5.10,",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t\tthe IUT entity must provide a resource named coap_URI\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t\twhen {\n\t\t\t\tthe IUT entity receives a message containing\n\t\t\t\tmsg_option indicating value 0, /* CONfirmable */\n\t\t\t\tcode indicating value 0.01,\n\t\t\t\tcontent_format indicating value content_formats_id,\n\t\t\t\taccept indicating value content_formats_id;\n\t\t\t\t}\n\t\t\tthen {\n\t\t\t\tthe IUT entity sends the message containing\n\t\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\t\tcode indicating value 2.03;\n\t\t\t\t }\n\t\t\t}\n\t"
+        },
+        "TP_COAP_OPTIONS_CONTENT_ACCEPT_FAIL": {
+            "id": "TP_CoAP_Options_Content_Accept_Fail",
+            "objective": "The CoAP Accept option can be used to indicate which Content-Format",
+            "reference": "RFC7252#section5.10,",
+            "PICS": [
+                "PIC_Server"
+            ],
+            "init": "\t\twith\n\t\t{\n\t\t\tthe IUT entity must provide a resource named coap_URI\n\t\t}\n",
+            "expected": "\t\tensure that {\n\t\t\twhen {\n\t\t\t\tthe IUT entity receives a message containing\n\t\t\t\tmsg_option indicating value 0, /* CONfirmable */\n\t\t\t\tcode indicating value 0.01,\n\t\t\t\tcontent_format indicating value content_formats_id,\n\t\t\t\taccept indicating value content_formats_id;\n\t\t\t\t}\n\t\t\tthen {\n\t\t\t\tthe IUT entity sends the message containing\n\t\t\t\tmsg_type indicating value 2, /* ACknowledgement */\n\t\t\t\tcode indicating value 4.06;\n\t\t\t\t }\n\t\t\t}\n\t\t}"
+        }
+    }
+}

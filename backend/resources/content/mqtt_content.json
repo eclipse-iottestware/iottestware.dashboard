@@ -1,0 +1,24 @@
+{
+  "MQTT": [
+    {
+      "title": "mqtt-v3.1.1-os.pdf",
+      "link": "http://docs.oasis-open.org/mqtt/mqtt/v3.1.1/os/mqtt-v3.1.1-os.pdf",
+      "summary": "Official MQTT v3.1.1 specification by OASIS"
+    },
+    {
+      "title": "MQTT.org",
+      "link": "http://mqtt.org/",
+      "summary": "Official MQTT.org website"
+    },
+    {
+      "title": "OASIS MQTT TC",
+      "link": "https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=mqtt",
+      "summary": "OASIS MQTT TC"
+    },
+    {
+      "title": "Eclipse IoT-Testware: MQTT",
+      "link": "https://github.com/eclipse/iottestware.mqtt",
+      "summary": "The official GitHub repository of the MQTT Test Suite"
+    }
+  ]
+}
