@@ -28,6 +28,7 @@ RUN python /home/titan/iottestware/install.py -p mqtt -b --path /home/titan/Tita
 # PREPARE WEBSERVER
 # has to be changed to pull from git-repo later
 ADD . /home/titan/iottestware.webserver
+RUN mkdir /home/titan/iottestware.webserver/backend/bin
 RUN cd /home/titan/iottestware.webserver && mv /home/titan/Titan/IoT-Testware/iottestware.mqtt/bin/iottestware.mqtt /home/titan/iottestware.webserver/backend/bin && mv /home/titan/Titan/IoT-Testware/iottestware.coap/bin/iottestware.coap /home/titan/iottestware.webserver/backend/bin
 
 ## CREATE the version files with the latest commit for each test suite with git_log.py script
