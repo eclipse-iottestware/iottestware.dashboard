@@ -107,10 +107,10 @@ const mqttClientTestingConfig = (data) => {
     return {valid: false, reason: 'Data must not be empty'}
   }
   if (!validator.isValidHost(data.host)) {
-    return {valid: false, reason: 'Host ' + data.host + ' is invalid'}
+    return {valid: false, reason: 'Upper Tester Host ' + data.host + ' is invalid'}
   }
   if (!validator.isValidPort(data.port)) {
-    return {valid: false, reason: 'Port ' + data.port + ' is invalid'}
+    return {valid: false, reason: 'Upper Tester Port ' + data.port + ' is invalid'}
   }
   if (data.testcases.length === 0) {
     return {valid: false, reason: 'No test cases selected'}

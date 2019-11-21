@@ -45,8 +45,9 @@ export default class MQTTView extends React.Component {
       sutConfiguration: null,
       configurationId: null,
       clientTesting: {
-        host: '127.0.0.1',
-        port: '1884',
+        tsInterface: 'lo',  // interface on which the Test System will listen
+        host: '127.0.0.1',  // upper tester
+        port: '1884',       // upper tester
         keepAliveTimer: 5.0,
         maxTestCaseTimer: 10.0,
         timeoutVerdict: true,

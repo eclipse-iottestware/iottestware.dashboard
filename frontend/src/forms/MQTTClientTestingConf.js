@@ -20,18 +20,64 @@ import TimerValueInput from './inputs/TimerValueInput'
 import TestCaseSelect from './inputs/TestCaseSelect'
 import {TriStateCheckbox} from 'primereact/tristatecheckbox'
 import 'babel-polyfill'
+import { Dropdown } from 'primereact/dropdown'
 
 export default class MQTTClientTestingConf extends React.Component {
   constructor (props) {
     super(props)
 
+    this.state = {
+      interfaces: []
+    }
+
+    this.handleChange = this.handleChange.bind(this)
     this.handleTimerValueChange = this.handleTimerValueChange.bind(this)
     this.onTimeoutVerdictChange = this.onTimeoutVerdictChange.bind(this)
     this.handleSelectionChange = this.handleSelectionChange.bind(this)
+    this.onInterfaceChange = this.onInterfaceChange.bind(this)
+  }
+
+  componentDidMount () {
+    fetch('/v1/tools/ifconfig')
+      .then(response => response.json())
+      .then(data => {
+        const interfaces = []
+        Object.keys(data).forEach((item) => {
+          // TODO: do the filtering in the backend
+          // TODO: similar code in NetworkInterfaces.js
+          if (data[item].length > 0) {
+            data[item].forEach((ifItem) => {
+              if (ifItem.family === 'IPv4') {
+                interfaces.push({name: item, address: ifItem.address, netmask: ifItem.netmask})
+              }
+            })
+          }
+        })
+        return interfaces
+      }).then(ifItems => {
+        this.setState(update(this.state, { 'interfaces': {$set: ifItems} }))
+      })
+  }
+
+  handleChange (event) {
+    const target = event.target
+    const value = target.type === 'checkbox' ? target.checked : target.value
+    const name = target.id
+
+    const newInputState = update(this.props.state, {
+      [name]: {$set: value}
+    })
+
+    this.props.onChange(newInputState)
   }
 
   handleSelectionChange (selection) {
     const newInputState = update(this.props.state, {testcases: {$set: selection}})
+    this.props.onChange(newInputState)
+  }
+
+  onInterfaceChange (e) {
+    const newInputState = update(this.props.state, {tsInterface: {$set: e.value}})
     this.props.onChange(newInputState)
   }
 
@@ -62,6 +108,13 @@ export default class MQTTClientTestingConf extends React.Component {
     return (
       <div>
         <Growl ref={(el) => this.growl = el} />
+        <h3 className='first'>Test System</h3>
+        <div className='p-grid p-fluid'>
+          <Dropdown id='ifSelector' value={this.props.state.tsInterface}
+            options={this.state.interfaces}
+            onChange={this.onInterfaceChange}
+            style={{width: '200px'}} placeholder='Select Interface' optionLabel='name' />
+        </div>
         <h3 className='first'>Upper Tester</h3>
         <div className='p-grid p-fluid'>
           <HostInput handleChange={this.handleChange} value={this.props.state.host} defaultValue='iot.eclipse.org' />
@@ -72,7 +125,7 @@ export default class MQTTClientTestingConf extends React.Component {
           <TimerValueInput handleChange={this.handleTimerValueChange} tooltip={'keep alive value'} value={this.props.state.keepAliveTimer} defaultValue={5.0} id={'keepAliveTimer'} />
           <TimerValueInput handleChange={this.handleTimerValueChange} tooltip={'max. duration of a single test case'} value={this.props.state.maxTestCaseTimer} defaultValue={10.0} id={'maxTestCaseTimer'} />
           {verdictTimeoutHead}
-          <TriStateCheckbox value={this.props.state.timeoutVerdict} onChange={this.onTimeoutVerdictChange} tooltip='How to handle timeouts'/>
+          <TriStateCheckbox value={this.props.state.timeoutVerdict} onChange={this.onTimeoutVerdictChange} tooltip='How to handle timeouts' />
         </div>
         <h3 className='first'>Test Case Selection</h3>
         <div className='p-grid p-fluid'>

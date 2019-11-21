@@ -11,17 +11,37 @@
  * SPDX-License-Identifier: EPL-2.0 4
  ********************************************************************************/
 
-const testcasePrefixMQTT = 'MQTT_TestCases.'  // the filename of the TestCases TTCN-3 file
+// the filenames of the TestCases TTCN-3 file which contain the testcases
+// these are required to construct the testcase identifiers in configuration files
+// e.g. MQTT_TestCases.TC_{ID}
+const brokerTestingFile = 'MQTT_TestCases'
+const clientTestingFile = 'MQTT_Broker_Testcases'
 
 module.exports = (sut, data) => {
   let testcases = ''
-  data.testcases.forEach((tc) => (testcases += testcasePrefixMQTT + tc + '\n'))
 
   let configuration
 
   if (sut.toLowerCase() === 'broker') {
+    data.testcases.forEach((tc) => (testcases += brokerTestingFile + '.' + tc + '\n'))
     configuration = brokerTestingConfig(data, testcases)
   } else if (sut.toLowerCase() === 'client') {
+    data.testcases.forEach((tc) => (testcases += clientTestingFile + '.' + tc + '\n'))
+
+    // adding Test System Parameters:
+    // the Upper Tester will require the IP of the Test System to be able to connect
+    const os = require('os')
+    const interfaces = os.networkInterfaces()
+    Object.keys(interfaces).forEach(key => {
+      interfaces[key].forEach(inf => {
+        //console.log('-> Interface ' + key + ': ' + inf.address + ' ' + inf.netmask + ' ==> ' + JSON.stringify(data.tsInterface))
+        // let's consider only IPv4 for now!
+        if (inf.family === 'IPv4') {
+          if (key === data.tsInterface.name) { data.tsHost = inf.address }
+        }
+      })
+    })
+
     configuration = clientTestingConfig(data, testcases)
   }
 
@@ -38,16 +58,16 @@ PX_CLIENTS :=
   {
     clientId := "${data.clients[0].clientid}",
     username := "${data.clients[0].username}",
-    password := "${data.clients[0].password}",
+    password := "${data.clients[0].password}"
   },
   {
     clientId := "${data.clients[1].clientid}",
     username := "${data.clients[1].username}",
-    password := "${data.clients[1].password}",
+    password := "${data.clients[1].password}"
   }
 }
 
-PX_TOPIC_NAME := "${data.topic}",
+PX_TOPIC_NAME := "${data.topic}"
 PX_TOPIC_NAME_RESTRICTED := "eclipse/iot/testware/restricted"
 
 PX_REUSE_ADDRESS := true
@@ -85,12 +105,12 @@ UnixSocketsEnabled := Yes
 const clientTestingConfig = (data, testcases) => `
 [MODULE_PARAMETERS]
 ## MQTT Broker (Test System) configuration
-PX_LISTEN_HOSTNAME := "localhost"
+PX_LISTEN_HOSTNAME := "${data.tsHost}"
 PX_LISTEN_PORT := 1883
 
 ## Upper Tester configuration. 
 ## UT must be running on client side
-PX_UPPER_TESTER_HOSTNAME := ${data.host}
+PX_UPPER_TESTER_HOSTNAME := "${data.host}"
 PX_UPPER_TESTER_PORT := ${data.port}
 
 ## Timeouts and timeout behaviours
@@ -109,8 +129,8 @@ PX_ALLOW_SPECIAL_CHAR_CLIENT_IDS := true    # see [MQTT-3.1.3-5]
 
 [LOGGING]
 LogFile := "${data.path}/%e.%h-%r.%s"
-FileMask := LOG_ALL | DEBUG | MATCHING
-ConsoleMask := USER | TESTCASE | STATISTICS #| ERROR | WARNING | PORTEVENT
+FileMask := LOG_ALL
+ConsoleMask := ERROR | WARNING | TESTCASE | STATISTICS | PORTEVENT
 LogSourceInfo := Yes
 AppendFile := No
 TimeStampFormat := DateTime
