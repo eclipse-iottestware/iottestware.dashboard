@@ -19,15 +19,17 @@ const router = express.Router()
 
 // Helpers
 const protocolNamings = require('../helpers/protocolNamings')
+const sutChoice = require('../helpers/sutChoice')
 const tcreader = require('../testware/testcasesReader')
 
 /**
  * First check if the requested protocol is valid
  */
-router.use('/:protocol', (req, res, next) => {
+router.use('/:protocol/:sut', (req, res, next) => {
   const protocol = protocolNamings.lowerCaseProtocol(req.params.protocol)
+  const sut = sutChoice.lowerCaseSUT(req.params.sut)
 
-  if (protocol) {
+  if (protocol && sut) {
     next()
   } else {
     res.status(500).json({reason: 'Requested protocol ' + protocol + ' is not supported'})
@@ -37,9 +39,10 @@ router.use('/:protocol', (req, res, next) => {
 /**
  * Request to get all test cases for <protocol>
  */
-router.get('/:protocol', (req, res) => {
+router.get('/:protocol/:sut', (req, res) => {
   const protocol = protocolNamings.lowerCaseProtocol(req.params.protocol)
-  const tcs = tcreader(protocol)
+  const sut = sutChoice.lowerCaseSUT(req.params.sut)
+  const tcs = tcreader(protocol, sut)
 
   res.json(tcs)
 })

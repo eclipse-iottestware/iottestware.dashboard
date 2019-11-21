@@ -11,8 +11,8 @@
  * SPDX-License-Identifier: EPL-2.0 4
  ********************************************************************************/
 import React from 'react'
+
 import {InputText} from 'primereact/inputtext'
-import {Tooltip} from 'primereact/tooltip'
 
 export default class HostInput extends React.Component {
   constructor (props) {
@@ -31,18 +31,14 @@ export default class HostInput extends React.Component {
 
   render () {
     return (
-      <div className='ui-g-6 ui-md-6'>
-        <div className='ui-inputgroup'>
-          <span className='ui-inputgroup-addon'>
+      <div className='p-col-12 p-md-6'>
+        <div className='p-inputgroup'>
+          <span className='p-inputgroup-addon'>
             <i className='fa fa-server'
               onClick={e => this.setDefaultValue(e, this.props.defaultValue, this.props.handleChange)} />
           </span>
-          <Tooltip for={'#host'}
-            title='IP or Hostname'
-            tooltipEvent='hover'
-            showDelay={1000}
-            hideDelay={500} />
           <InputText placeholder='Host'
+            tooltip='IP or Hostname'
             value={this.props.value}
             onChange={this.props.handleChange}
             id={'host'} />

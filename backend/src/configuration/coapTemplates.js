@@ -13,7 +13,8 @@
 
 const testcasePrefixCoAP = 'CoAP_Testcases.' // the filename of the TestCases TTCN-3 file
 
-module.exports = (data) => {
+module.exports = (sut, data) => {
+  // TODO: use SUT param to build server or client testing configuration
   let testcases = ''
   data.testcases.forEach((tc) => (testcases += testcasePrefixCoAP + tc.toUpperCase() + '\n'))
 

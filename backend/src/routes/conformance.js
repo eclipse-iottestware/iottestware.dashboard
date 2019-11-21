@@ -24,6 +24,7 @@ const router = express.Router()
 
 // Helpers
 const protocolNamings = require('../helpers/protocolNamings')
+const sutChoice = require('../helpers/sutChoice')
 const validator = require('../configuration/configInputValidator')
 const configuration = require('../configuration/configCreator')
 const testPurposes = require('../testware/testpurposesReader')
@@ -38,8 +39,8 @@ module.exports = (socketIO) => {
   /**
    * First check if all inputs are given and valid
    */
-  router.use('/cfg/:protocol', (req, res, next) => {
-    const check = validator(req.params.protocol, req.body)
+  router.use('/cfg/:protocol/:sut', (req, res, next) => {
+    const check = validator(req.params.protocol, req.params.sut, req.body)
 
     if (!check.valid) {
       res.status(500).json(check)
@@ -51,14 +52,15 @@ module.exports = (socketIO) => {
   /**
    * After validation proceed with building the configuration file
    */
-  router.post('/cfg/:protocol', (req, res) => {
+  router.post('/cfg/:protocol/:sut', (req, res) => {
     const protocol = protocolNamings.lowerCaseProtocol(req.params.protocol)
-    const ret = configuration.createConfig(protocol, req.body)
+    const sut = sutChoice.lowerCaseSUT(req.params.sut)
+    const config = configuration.createConfig(protocol, sut, req.body)
 
-    if (ret.valid) {
-      res.status(200).json(ret)
+    if (config) {
+      res.status(200).json(config)
     } else {
-      res.status(500).json(ret)
+      res.status(500).json({valid: false, reason: 'Configuration cannot be build!'})
     }
   })
 

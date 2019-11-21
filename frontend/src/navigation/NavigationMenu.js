@@ -57,7 +57,7 @@ export default class NavigationMenu extends React.Component {
 
             <Submenu title={'MQTT'} id={1} openMenu={this.openMenu} activeMenu={this.state.activeMenu}>
               <Link to='/testpurposes/mqtt'><i className='fa fa-fw fa-book' /> Test Purposes</Link>
-              <Link to='/testsuites/mqtt'><i className='fa fa-fw fa-check-square' /> Conformance</Link>
+              <Link to='/conformance/mqtt'><i className='fa fa-fw fa-check-square' /> Conformance Testing</Link>
               <Link to='/history/mqtt'><i className='fa fa-fw fa-history' /> History</Link>
               <Link to='/eval/mqtt'><i className='fa fa-fw fa-area-chart' /> Evaluation</Link>
               <Link to='/fuzzing/mqtt'><i className='fa fa-fw fa-bomb' /> Fuzzing</Link>

@@ -12,7 +12,6 @@
  ********************************************************************************/
 import React from 'react'
 import {InputText} from 'primereact/inputtext'
-import {Tooltip} from 'primereact/tooltip'
 
 export default class ResourceUriInput extends React.Component {
   constructor (props) {
@@ -38,12 +37,8 @@ export default class ResourceUriInput extends React.Component {
             <i className='fa fa-microchip'
               onClick={e => this.setDefaultValue(e, this.props.defaultValue, this.props.handleChange)} />
           </span>
-          <Tooltip for={'#uri'}
-            title='The URI of the Resource'
-            tooltipEvent='hover'
-            showDelay={1000}
-            hideDelay={500} />
           <InputText placeholder='URI'
+            tooltip='The URI of the Resource'
             value={this.props.value}
             onChange={this.props.handleChange}
             id={this.props.id}

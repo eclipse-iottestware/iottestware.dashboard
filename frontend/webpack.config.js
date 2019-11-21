@@ -27,7 +27,7 @@ module.exports = {
         query: {
           // presets are collection of plugins
           presets: ['es2015', 'react', 'stage-2'],
-          plugins: ['transform-class-properties']
+          plugins: ['transform-class-properties', 'react-html-attrs']
         }
       }, {
         test: /\.css$/,

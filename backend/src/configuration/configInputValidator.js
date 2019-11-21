@@ -12,27 +12,38 @@
  ********************************************************************************/
 const protocolNamings = require('../helpers/protocolNamings')
 const validator = require('../helpers/inputValidator')
+const sutValidator = require('../helpers/sutChoice')
 
 /**
  * Checks the incoming configuration data for <protocol> for invalid values
  * @param protocol
+ * @param sut
  * @param data is the body payload from e.g a POST request
  * @returns {{valid: boolean, reason: string}}
  */
-module.exports = (protocol, data) => {
+module.exports = (protocol, sut, data) => {
   protocol = protocolNamings.lowerCaseProtocol(protocol)
+  sut = sutValidator.lowerCaseSUT(sut)
 
-  if (!protocol) {
-    return {valid: false, reason: 'Requested protocol ' + protocol + ' is invalid'}
+  if (!protocol || !sut) {
+    return {valid: false, reason: 'Requested protocol ' + protocol + 'and sut' + sut + ' are invalid'}
   } else if (!Object.keys(data).length > 0) {
     return {valid: false, reason: 'Given input contains no data'}
   } else {
     switch (protocol) {
-      case 'mqtt': return mqttConfigInput(data)
+      case 'mqtt': return mqttConfigInput(data, sut)
       case 'coap': return coapConfigInput(data)
       case 'opc': return opcConfigInput(data)
       default: return {valid: false, reason: 'Requested protocol ' + protocol + ' not implemented'}
     }
+  }
+}
+
+const mqttConfigInput = (data, sut) => {
+  if (sut === 'broker') {
+    return mqttBrokerTestingConfig(data)
+  } else if (sut === 'client') {
+    return mqttClientTestingConfig(data)
   }
 }
 
@@ -41,7 +52,7 @@ module.exports = (protocol, data) => {
  * @param data
  * @returns {{valid: boolean, reason: string}}
  */
-const mqttConfigInput = (data) => {
+const mqttBrokerTestingConfig = (data) => {
   if (!data) {
     return {valid: false, reason: 'Data must not be empty'}
   }
@@ -51,29 +62,55 @@ const mqttConfigInput = (data) => {
   if (!validator.isValidPort(data.port)) {
     return {valid: false, reason: 'Port ' + data.port + ' is invalid'}
   }
-  if (!validator.containsNoSpaces(data.username)) {
-    return {valid: false, reason: 'Username must not contain spaces'}
-  }
-  if (validator.isEmpty(data.username)) {
-    return {valid: false, reason: 'Username must not be empty'}
-  }
-  if (!validator.containsNoSpaces(data.password)) {
-    return {valid: false, reason: 'Password must not contain spaces'}
-  }
-  if (validator.isEmpty(data.password)) {
-    return {valid: false, reason: 'Password must not be empty'}
-  }
-  if (!validator.containsNoSpaces(data.clientid)) {
-    return {valid: false, reason: 'Client ID must not contain spaces'}
-  }
-  if (validator.isEmpty(data.clientid)) {
-    return {valid: false, reason: 'Client ID must not be empty'}
-  }
+
+  data.clients.forEach(c => {
+    if (!validator.containsNoSpaces(c.username)) {
+      return {valid: false, reason: 'Username must not contain spaces'}
+    }
+    if (validator.isEmpty(c.username)) {
+      return {valid: false, reason: 'Username must not be empty'}
+    }
+    if (!validator.containsNoSpaces(c.password)) {
+      return {valid: false, reason: 'Password must not contain spaces'}
+    }
+    if (validator.isEmpty(c.password)) {
+      return {valid: false, reason: 'Password must not be empty'}
+    }
+    if (!validator.containsNoSpaces(c.clientid)) {
+      return {valid: false, reason: 'Client ID must not contain spaces'}
+    }
+    if (validator.isEmpty(c.clientid)) {
+      return {valid: false, reason: 'Client ID must not be empty'}
+    }
+  })
+
   if (!validator.containsNoSpaces(data.topic)) {
     return {valid: false, reason: 'Topic must not contain spaces'}
   }
   if (validator.isEmpty(data.topic)) {
     return {valid: false, reason: 'Topic must not be empty'}
+  }
+  if (data.testcases.length === 0) {
+    return {valid: false, reason: 'No test cases selected'}
+  }
+
+  return {valid: true, reason: 'All inputs are valid'}
+}
+
+/**
+ * Checks the incoming MQTT configuration data for invalid values
+ * @param data
+ * @returns {{valid: boolean, reason: string}}
+ */
+const mqttClientTestingConfig = (data) => {
+  if (!data) {
+    return {valid: false, reason: 'Data must not be empty'}
+  }
+  if (!validator.isValidHost(data.host)) {
+    return {valid: false, reason: 'Host ' + data.host + ' is invalid'}
+  }
+  if (!validator.isValidPort(data.port)) {
+    return {valid: false, reason: 'Port ' + data.port + ' is invalid'}
   }
   if (data.testcases.length === 0) {
     return {valid: false, reason: 'No test cases selected'}

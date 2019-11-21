@@ -45,8 +45,8 @@
     "nanoscroller": "^0.8.7",
     "npm": "^6.1.0",
     "pdfmake": "^0.1.36",
-    "primeicons": "^1.0.0-beta.9",
-    "primereact": "2.0.0-alpha.1",
+    "primeicons": "^2.0.0",
+    "primereact": "3.3.2",
     "react": "^16.3.2",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.2",
@@ -64,6 +64,7 @@
     "xml-js": "^1.6.7"
   },
   "devDependencies": {
+    "babel-plugin-react-html-attrs": "^2.1.0",
     "babel-preset-env": "^1.7.0",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",

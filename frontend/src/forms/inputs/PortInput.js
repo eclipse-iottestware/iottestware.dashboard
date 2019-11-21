@@ -12,7 +12,6 @@
  ********************************************************************************/
 import React from 'react'
 import {InputText} from 'primereact/inputtext'
-import {Tooltip} from 'primereact/tooltip'
 
 export default class PortInput extends React.Component {
   constructor (props) {
@@ -31,18 +30,14 @@ export default class PortInput extends React.Component {
 
   render () {
     return (
-      <div className='ui-g-6 ui-md-6'>
-        <div className='ui-inputgroup'>
-          <span className='ui-inputgroup-addon'>
+      <div className='p-col-12 p-md-6'>
+        <div className='p-inputgroup'>
+          <span className='p-inputgroup-addon'>
             <i className='fa fa-plug'
               onClick={e => this.setDefaultValue(e, this.props.defaultValue, this.props.handleChange)} />
           </span>
-          <Tooltip for={'#port'}
-            title='port number (1..65535)'
-            tooltipEvent='hover'
-            showDelay={1000}
-            hideDelay={500} />
           <InputText placeholder='Port'
+            tooltip='port number (1..65535)'
             value={this.props.value}
             onChange={this.props.handleChange}
             id={'port'}

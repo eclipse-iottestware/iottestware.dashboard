@@ -12,7 +12,6 @@
  ********************************************************************************/
 import React from 'react'
 import {InputText} from 'primereact/inputtext'
-import {Tooltip} from 'primereact/tooltip'
 
 export default class MqttTopicInput extends React.Component {
   constructor (props) {
@@ -32,18 +31,14 @@ export default class MqttTopicInput extends React.Component {
 
   render () {
     return (
-      <div className='ui-g-12 ui-md-6'>
-        <div className='ui-inputgroup'>
-          <span className='ui-inputgroup-addon'>
+      <div className='p-col-12 p-md-6'>
+        <div className='p-inputgroup'>
+          <span className='p-inputgroup-addon'>
             <i className='fa fa-inbox'
               onClick={e => this.setDefaultValue(e, this.props.defaultValue, this.props.handleChange)} />
           </span>
-          <Tooltip for={'#topic'}
-            title='Topic Names [MQTT-4.7.1-1]'
-            tooltipEvent='hover'
-            showDelay={1000}
-            hideDelay={500} />
           <InputText placeholder='Topic Name'
+            tooltip='Topic Names [MQTT-4.7.1-1]'
             value={this.props.value}
             onChange={this.props.handleChange}
             id={'topic'}

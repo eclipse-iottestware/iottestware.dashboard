@@ -14,11 +14,10 @@
 .test-results {
   font-size: 0.9em;
 
-  // TODO: will miss in next release of primereact ?
-  //$headerBorderWidth: 1;
-  //$headerBorderColor: rgba(0,220,0,1);
-  //$headerBgColor: rgba(200,200,200,1);
-  //$headerFontWeight: 1em;
+  $headerBorderWidth: 1;
+  $headerBorderColor: rgba(0,220,0,1);
+  $headerBgColor: rgba(200,200,200,1);
+  $headerFontWeight: 1em;
 
   div {
     .tdl-field {
@@ -30,7 +29,6 @@
     }
 
     .tdl-label {
-      // TODO: get colors from color-scheme here!
       background-color: $headerBgColor;
       font-weight: $headerFontWeight;
     }
@@ -61,5 +59,21 @@
       font-weight: bold;
       text-align: center;
     }
+  }
+}
+
+// if required highlighted verdicts in headers
+h1,h2,h3,h4,h5,h6 {
+  .verdict-pass {
+    color: $verdict-color-pass;
+    font-weight: bold;
+  }
+  .verdict-fail {
+    color: $verdict-color-fail;
+    font-weight: bold;
+  }
+  .verdict-inconc {
+    color: $verdict-color-inconc;
+    font-weight: bold;
   }
 }

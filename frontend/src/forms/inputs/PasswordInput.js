@@ -53,16 +53,14 @@ export default class PasswordInput extends React.Component {
     return (
       <InputText placeholder='Password'
         onChange={this.changeHandler}
-        value={this.state.value}
-        id={'password'} />
+        value={this.state.value} />
     )
   }
 
   renderUnmasked () {
     return (
       <Password onChange={this.changeHandler}
-        value={this.state.value}
-        id={'password'} />
+        value={this.state.value} />
 
     )
   }
@@ -77,9 +75,9 @@ export default class PasswordInput extends React.Component {
     }
 
     return (
-      <div className='ui-g-12 ui-md-6'>
-        <div className='ui-inputgroup'>
-          <span className='ui-inputgroup-addon'>
+      <div className='p-col-12 p-md-6'>
+        <div className='p-inputgroup'>
+          <span className='p-inputgroup-addon'>
             <i className='fa fa-user-secret'
               onClick={e => this.setRandomPassword(e)} />
           </span>

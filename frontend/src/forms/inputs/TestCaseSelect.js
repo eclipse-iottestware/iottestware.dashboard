@@ -28,18 +28,22 @@ export default class TestCaseSelect extends React.Component {
   }
 
   handleSelectionChange (event) {
-    this.setState(update(this.state, {selected: {$set: event.selection}}))
+    this.setState(update(this.state, {selected: {$set: event.value}}))
 
     // forward the selected testcases
     let testcases = []
-    event.selection.map(s => {
-      if (s.data === 'testcase') { testcases.push(s.label) }
+
+    Object.keys(event.value).forEach(s => {
+      // test case groups are also within the list
+      // filter only testcase names which are always prefixed with TC_
+      if (s.startsWith('TC_')) { testcases.push(s) }
     })
+
     this.props.handleSelectionChange(testcases)
   }
 
   componentDidMount () {
-    fetch(testcasesURI(this.props.protocol), {method: 'GET',
+    fetch(testcasesURI(this.props.protocol, this.props.sut), {method: 'GET',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -56,9 +60,10 @@ export default class TestCaseSelect extends React.Component {
         let testcasesData = []
         Object.entries(tcs).map(([key, value]) => {
           let testcases = []
-          value.map(v => testcases.push({'label': v, 'data': 'testcase'}))
+          value.map(v => testcases.push({'key': v, 'label': v, 'data': 'testcase'}))
 
           let item = {
+            'key': key,
             'label': key,
             'data': 'PICS',
             'expandedIcon': 'fa fa-fw fa-minus-square-o',
@@ -79,8 +84,9 @@ export default class TestCaseSelect extends React.Component {
         <Growl ref={(el) => this.growl = el} />
         <Tree value={this.state.data}
           selectionMode='checkbox'
-          selection={this.state.selected}
-          selectionChange={this.handleSelectionChange} />
+          selectionKeys={this.state.selected}
+          onSelectionChange={this.handleSelectionChange}
+          />
       </div>
     )
   }

@@ -14,29 +14,51 @@
 // TODO: use fileHelper instead of 'fs'
 const fs = require('fs')
 const protocolNamings = require('../helpers/protocolNamings')
+const sutChoice = require('../helpers/sutChoice')
 
-module.exports = (protocol) => {
+module.exports = (protocol, sut) => {
   protocol = protocolNamings.lowerCaseProtocol(protocol)
+  sut = sutChoice.lowerCaseSUT(sut)
 
   switch (protocol) {
-    case 'mqtt': return getMqttTestCases()
-    case 'coap': return getCoapTestCases()
+    case 'mqtt': return getMqttTestCases(sut)
+    case 'coap': return getCoapTestCases(sut)
     default: return null  // must yield in errors!
   }
 }
 
-const getMqttTestCases = () => {
-  const filepath = 'backend/resources/testcases/mqtt_testcases.json'
-  const data = fs.readFileSync(filepath, 'utf8')
+const getMqttTestCases = (sut) => {
+  let filepath
 
-  return JSON.parse(data)
+  if (sut === 'broker') {
+    filepath = 'backend/resources/testcases/mqtt_broker_testcases.json'
+  } else if (sut === 'client') {
+    filepath = 'backend/resources/testcases/mqtt_client_testcases.json'
+  }
+
+  if (filepath) {
+    const data = fs.readFileSync(filepath, 'utf8')
+    return JSON.parse(data)
+  } else {
+    return JSON.parse('{}') // empty JSON
+  }
 }
 
-const getCoapTestCases = () => {
-  const filepath = 'backend/resources/testcases/coap_testcases.json'
-  const data = fs.readFileSync(filepath, 'utf8')
+const getCoapTestCases = (sut) => {
+  let filepath
 
-  return JSON.parse(data)
+  if (sut === 'server') {
+    filepath = 'backend/resources/testcases/coap_server_testcases.json'
+  } else if (sut === 'client') {
+    filepath = 'backend/resources/testcases/coap_client_testcases.json'
+  }
+
+  if (filepath) {
+    const data = fs.readFileSync(filepath, 'utf8')
+    return JSON.parse(data)
+  } else {
+    return JSON.parse('{}') // empty JSON
+  }
 }
 
 exports.getMqttTestCases = getMqttTestCases

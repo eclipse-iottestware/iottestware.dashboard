@@ -16,11 +16,7 @@ import HomeView from '../views/HomeView'
 import GettingStartedView from '../views/GettingStartedView'
 import TestPurposesView from '../views/TestPurposeView'
 import HistoryView from '../views/HistoryView'
-import TestSuitesView from '../views/TestSuitesView'
-import MQTTView from '../views/MQTTView'
 import EvaluationView from '../views/EvaluationView'
-import CoAPView from '../views/CoAPView'
-import OPCUAView from '../views/OPCUAView'
 import ToolsView from '../views/ToolsView'
 import PingView from '../views/PingView'
 import NmapView from '../views/NmapView'
@@ -35,6 +31,16 @@ import TerminalView from '../views/TerminalView'
 import ThemingPage from '../demos/ThemingPage'
 import IconsPage from '../demos/IconsPage'
 import TestResultsView from '../views/TestResultsView'
+import ConformanceTestingView from '../views/ConformanceTestingView'
+import MQTTView from '../views/MQTTView'
+
+/* TODO:
+<Route exact path='/testsuites_tbd' component={TestSuitesView} />
+<Route exact path='/testsuites/coap' component={CoAPView} />
+<Route exact path='/testsuites/opcua' component={OPCUAView} />
+<Route path='/conformance/:protocol?/:config?' component={MQTTView} />
+<Route path='/conformance/mqtt/:config?' component={MQTTView} />
+ */
 
 export default class Routes extends React.Component {
   render () {
@@ -50,10 +56,8 @@ export default class Routes extends React.Component {
         <Route path='/resources/:protocol?' component={ResourcesView} />
         <Route path='/fuzzing/:protocol?' component={FuzzingView} />
 
-        <Route exact path='/testsuites' component={TestSuitesView} />
-        <Route exact path='/testsuites/mqtt' component={MQTTView} />
-        <Route exact path='/testsuites/coap' component={CoAPView} />
-        <Route exact path='/testsuites/opcua' component={OPCUAView} />
+        <Route path='/conformance/:protocol/' component={ConformanceTestingView} />
+
         <Route exact path='/tools' component={ToolsView} />
         <Route exact path='/tools/ping' component={PingView} />
         <Route exact path='/tools/nmap' component={NmapView} />

@@ -18,60 +18,40 @@ const timeStamp = require('../helpers/timeStamp')
 const mqttConfiguration = require('./mqttTemplates')
 const coapConfiguration = require('./coapTemplates')
 
-const filePrefixMQTT = 'mqtt'
-const fileNameMQTT = filePrefixMQTT + '.cfg'
-
-const filePrefixCoAP = 'coap'
-const fileNameCoAP = filePrefixCoAP + '.cfg'
-
 const fileName = (protocol) => {
   protocol = protocolNamings.lowerCaseProtocol(protocol)
+  return protocol + '.cfg'
+}
 
-  switch (protocol) {
-    case 'mqtt': return fileNameMQTT
-    case 'coap': return fileNameCoAP
-    // case 'opc': return opcConfigInput(data)
-    default: return 'unknonw_protocol.cfg'  // must yield in errors!
+const createConfig = (protocol, sut, data) => {
+  const ts = timeStamp()
+  const path = pathHelper.storagePath(protocol, ts)
+
+  data.path = path
+  const configuration = buildConfig(protocol, sut, data)
+
+  if (configuration) {
+    fileHelper.writeFile(configuration, path, fileName(protocol))
+
+    return {valid: true, timestamp: ts, configuration: configuration}
   }
 }
 
-const createConfig = (protocol, data) => {
+const buildConfig = (protocol, sut, data) => {
   protocol = protocolNamings.lowerCaseProtocol(protocol)
 
-  if (!protocol) {
-    return {valid: false, reason: 'Requested protocol ' + protocol + ' is invalid'}
-  } else if (!Object.keys(data).length > 0) {
-    return {valid: false, reason: 'Given input contains no data'}
-  } else {
-    const ts = timeStamp()
-
+  if (protocol && (Object.keys(data).length > 0)) {
+    let config
     switch (protocol) {
-      case 'mqtt': return createMqttConfig(data, ts)
-      case 'coap': return createCoapConfig(data, ts)
-      // case 'opc': return opcConfigInput(data)
-      default: return {valid: false, reason: 'Requested protocol ' + protocol + ' not implemented'}
+      case 'mqtt':
+        config = mqttConfiguration(sut, data)
+        break
+      case 'coap':
+        config = coapConfiguration(sut, data)
+        break
     }
+    return config
   }
-}
-
-const createMqttConfig = (data, ts) => {
-  const path = pathHelper.storagePath('mqtt', ts)
-
-  data.path = path
-  const configuration = mqttConfiguration(data)
-  fileHelper.writeFile(configuration, path, fileNameMQTT)
-
-  return {valid: true, timestamp: ts}
-}
-
-const createCoapConfig = (data, ts) => {
-  const path = pathHelper.storagePath('coap', ts)
-
-  data.path = path
-  const configuration = coapConfiguration(data)
-  fileHelper.writeFile(configuration, path, fileNameCoAP)
-
-  return {valid: true, timestamp: ts}
 }
 
 const configUri = (protocol, timestamp) => {
@@ -84,6 +64,7 @@ const configExist = (protocol, timestamp) => {
 }
 
 module.exports = {
+  buildConfig: buildConfig,
   createConfig: createConfig,
   configUri: configUri,
   configExist: configExist

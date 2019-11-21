@@ -120,18 +120,11 @@ export const historyReadFileURI = (protocol, timestamp, fileName) => {
  * @param protocol
  * @returns {string}
  */
-export const testcasesURI = (protocol) => {
+export const testcasesURI = (protocol, sut) => {
   protocol = protocol.toLowerCase()
+  sut = sut.toLowerCase()
 
-  let endpoint = ''
-  switch (protocol) {
-    case 'mqtt':
-      endpoint = '/v1/testcases/mqtt'
-      break
-    case 'coap':
-      endpoint = '/v1/testcases/coap'
-      break
-  }
+  const endpoint = '/v1/testcases/' + protocol + '/' + sut
 
   return endpoint
 }
@@ -167,18 +160,10 @@ export const testpurposesURI = (protocol) => {
  * @param protocol
  * @returns {string}
  */
-export const testsuiteConfigURI = (protocol) => {
+export const testsuiteConfigURI = (protocol, sut) => {
   protocol = protocol.toLowerCase()
 
-  let endpoint = ''
-  switch (protocol) {
-    case 'mqtt':
-      endpoint = '/v1/conformance/cfg/mqtt'
-      break
-    case 'coap':
-      endpoint = '/v1/conformance/cfg/coap'
-      break
-  }
+  let endpoint = '/v1/conformance/cfg/' + protocol + '/' + sut
 
   return endpoint
 }

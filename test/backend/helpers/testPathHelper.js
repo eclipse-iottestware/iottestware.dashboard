@@ -27,11 +27,11 @@ describe('TS: getting the storage path base', function () {
 
 describe('TS: getting the resources paths', function () {
   it('TC:  generate path', function () {
-    const res = pathHelper.resourcesPath('testcases', 'coap_testcases.json')
+    const res = pathHelper.resourcesPath('testcases', 'coap_server_testcases.json')
     const pathElements = res.split('/')
 
-    // should generate: .../resources/testcases/coap_testcases.json
-    assert.equal(pathElements.pop(), 'coap_testcases.json')
+    // should generate: .../resources/testcases/coap_server_testcases.json
+    assert.equal(pathElements.pop(), 'coap_server_testcases.json')
     assert.equal(pathElements.pop(), 'testcases')
     assert.equal(pathElements.pop(), 'resources')
   })
