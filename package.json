@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node .",
     "standard": "standard",
+    "preinstall": "cd $(pwd)",
     "test": "nyc --reporter=text mocha --recursive --reporter list",
     "lint": "eslint --ext .js backend/** src/** --ignore-path .eslintignore"
   },

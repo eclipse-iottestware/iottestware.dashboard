@@ -37,10 +37,8 @@ class HistoryView extends React.Component {
         <div className='content-section section-content'>
           <Growl ref={(el) => this.growl = el} />
           <h3>Browse Historical Files</h3>
-          <div className='ui-g ui-fluid'>
-            <div className='ui-g-12'>
-              <FileTreeTable protocol={this.props.protocol} />
-            </div>
+          <div>
+            <FileTreeTable protocol={this.props.protocol} />
           </div>
         </div>
       </div>

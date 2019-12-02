@@ -26,38 +26,41 @@ export const loadHistory = (protocol, callback) => {
       return response.json()
     })
     .then(historyData => {
-      let treeData = []
+      let folderItems = []
       let trs = historyData.testruns.sort((a, b) => b.id - a.id)  // sort the data by id (timestamp)
-      trs.forEach(item => {
-        const date = new Date(item.id * 1000).toLocaleString()
+      trs.forEach(folder => {
+        const date = new Date(folder.id * 1000).toLocaleString()
 
-        let elementChildren = []
-        item.files.forEach(file => {
-          const child = {
+        let files = []
+        folder.files.forEach(f => {
+          const fileItem = {
+            'key': folder.id + '_' + f,
             'data': {
-              'key': item.id + '_' + file,
+              'name': f,
               'date': date,
-              'timestamp': item.id,
-              'name': file,
-              'parent': item.protocol
+              'timestamp': folder.id,
+              'type': 'file',
+              'proto': folder.protocol
             }
           }
-          elementChildren.push(child)
+          files.push(fileItem)
         })
 
-        const element = {
+        const folderItem = {
+          'key': folder.protocol + '_' + folder.id,
           'data': {
-            'key': item.id,
+            'name': folder.protocol,
             'date': date,
-            'timestamp': item.id,
-            'name': item.protocol
+            'timestamp': folder.id,
+            'type': 'folder'
           },
-          'children': elementChildren
+          'children': files
         }
-        treeData.push(element)
+
+        folderItems.push(folderItem)
       })
 
-      callback(treeData)
+      callback(folderItems)
     }).catch(error => {
       const emptyTreeData = []
       callback(emptyTreeData, error)
@@ -97,7 +100,8 @@ const downloadHistory = (endpoint, fileName) => {
     }).then(data => {
       FileSaver.saveAs(data, fileName)
     }).catch(error => {
-      this.growl.show({severity: 'error', summary: 'Failure', detail: error.message})
+      //this.growl.show({severity: 'error', summary: 'Failure', detail: error.message})
+      return error
     })
 }
 
@@ -129,8 +133,8 @@ export const readHistoryFile = (protocol, timestamp, fileName, callback) => {
       }
       return response.json()
     }).then(data => {
-    callback(data.content)
-  }).catch(error => {
-    console.error('ERROR: ' + error)
-  })
+      callback(data.content)
+    }).catch(error => {
+      console.error('ERROR: ' + error)
+    })
 }

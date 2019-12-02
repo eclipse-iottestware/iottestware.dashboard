@@ -957,7 +957,7 @@
             "PICS": [
                 "PICS_BROKER_BASIC"
             ],
-            "expected": "\tensure that {\n\t\twhen {\n\t\t\tthe IUT entity receives a SUBSCRIBE message containing\n\t\t\tpayload containing\n\t\t\t\tfilterLength corresponding to TOPIC_FILTER_LEN_SEC_CVE_01,\n\t\t\t\ttopic_filter corresponding to TOPIC_FILTER_LEN_SEC_CVE_01;;\n\t\t\tfrom the ATTACKER_CLIENT entity\n\t\t} then {\n\t\t\tthe IUT entity not closes the TCP_CONNECTION for the PROBE_CLIENT entity\n\t\t}\n\t}\n\t}\n\t/*\n\t* Note: CVE does not mention the kind of Control Packet, this TP focuses on PUBLISH.\n\t*\t\t However, CONNECT also contains a topic (will_topic). This one might be also checked\n\t",
+            "expected": "\tensure that {\n\t\twhen {\n\t\t\tthe IUT entity receives a SUBSCRIBE message containing\n\t\t\tpayload containing\n\t\t\t\tfilterLength corresponding to TOPIC_FILTER_LEN_SEC_CVE_01,\n\t\t\t\ttopic_filter corresponding to TOPIC_FILTER_LEN_SEC_CVE_01;;\n\t\t\tfrom the ATTACKER_CLIENT entity\n\t\t} then {\n\t\t\tthe IUT entity not closes the TCP_CONNECTION for the PROBE_CLIENT entity\n\t\t}\n\t}",
             "id": "TP_MQTT_Broker_SEC_CVE_001",
             "init": "\twith {\n\t\t the PROBE_CLIENT entity established the MQTT_CONNECTION containing\n\t\t\tkeep_alive corresponding to PX_PROBE_CON_KEEP_ALIVE;\n\t}\n",
             "objective": "Verify that the IUT does not crash on reception of a malformed SUBSCRIBE Control Packet.",

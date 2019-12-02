@@ -18,6 +18,7 @@ import { TreeTable } from 'primereact/treetable'
 import { Column } from 'primereact/components/column/Column'
 import { Growl } from 'primereact/growl'
 import {Dialog} from 'primereact/dialog'
+import {InputTextarea} from 'primereact/inputtextarea'
 
 import { loadHistory, downloadHistoryFile, downloadHistoryFolder, deleteHistoryFolder, readHistoryFile } from '../loaders/HistoryLoader'
 
@@ -25,17 +26,19 @@ export default class FileTreeTable extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      selectedFile: null,
+      nodes: [],
+      expandedKeys: null,
       history: null,
       content: null,
       protocol: null
     }
 
     this.dataCallback = this.dataCallback.bind(this)
-    this.onSelectionChange = this.onSelectionChange.bind(this)
     this.onDownload = this.onDownload.bind(this)
     this.onDelete = this.onDelete.bind(this)
     this.onViewFile = this.onViewFile.bind(this)
+    this.actionTemplate = this.actionTemplate.bind(this)
+    this.toggleFolder = this.toggleFolder.bind(this)
   }
 
   componentDidMount () {
@@ -56,7 +59,7 @@ export default class FileTreeTable extends React.Component {
       loadHistory(this.state.protocol, this.dataCallback)
 
       // refresh the selection by simply setting 'null' as the current value
-      this.setState(update(this.state, {selectedFile: {$set: null}}))
+      this.setState(update(this.state, {expandedKeys: {$set: null}}))
     }
   }
 
@@ -69,27 +72,24 @@ export default class FileTreeTable extends React.Component {
     if (err) {
       this.growl.show({severity: 'error', summary: 'Failure', detail: err.message})
     }
-    this.setState(update(this.state, {history: {$set: data}}))
+    this.setState(update(this.state, {nodes: {$set: data}}))
   }
 
   /**
    * This method is triggered on press of the download button
    * @param e
    */
-  onDownload (e) {
-    const timestamp = this.state.selectedFile.data.timestamp
-    const fileName = this.state.selectedFile.data.name
+  onDownload (e, data) {
+    const timestamp = data.timestamp
+    const name = data.name
 
-    if (this.state.selectedFile.children) {
-      const folderName = fileName
-
-      // TODO: read the filename from header and remove the second param
-      const zipFileName = fileName + '_' + timestamp + '.zip'
-      downloadHistoryFolder(folderName, timestamp, zipFileName)
-    } else {
+    if (data.type === 'folder') {
+      const zipFileName = name + '_' + timestamp + '.zip'
+      downloadHistoryFolder(name, timestamp, zipFileName)
+    } else if (data.type === 'file') {
       // download a single file
-      const parent = this.state.selectedFile.data.parent
-      downloadHistoryFile(parent, timestamp, fileName)
+      const proto = data.proto
+      downloadHistoryFile(proto, timestamp, name)
     }
   }
 
@@ -97,97 +97,71 @@ export default class FileTreeTable extends React.Component {
    * This method is triggered on press of the delete button
    * @param e
    */
-  onDelete (e) {
-    const timestamp = this.state.selectedFile.data.timestamp
-    const fileName = this.state.selectedFile.data.name
+  onDelete (e, data) {
+    const timestamp = data.timestamp
+    const name = data.name
 
-    if (this.state.selectedFile.children) {
-      const folderName = fileName
-
+    if (data.type === 'folder') {
       // Trigger delete of a complete folder
-      deleteHistoryFolder(folderName, timestamp, (message) => {
+      deleteHistoryFolder(name, timestamp, (message) => {
         this.growl.show({severity: 'success', summary: 'Deleted', detail: message})
       })
 
       // load updated history from backend
       loadHistory(this.state.protocol, this.dataCallback)
-    } else {
-      // Note: deleting single files not implemented!
+    } else if (data.type === 'file') {
+      this.growl.show({severity: 'failure', summary: 'Deleted', detail: 'cannot delete single files!'})
     }
   }
 
-  onViewFile (e) {
-    const protocol = this.state.selectedFile.data.parent
-    const timestamp = this.state.selectedFile.data.timestamp
-    const fileName = this.state.selectedFile.data.name
+  onViewFile (e, data) {
+    const protocol = data.proto
+    const timestamp = data.timestamp
+    const fileName = data.name
 
     readHistoryFile(protocol, timestamp, fileName, (content) => {
       this.setState(update(this.state, {content: {$set: content}}))
     })
   }
 
-  /**
-   * This method is triggered each time the selection of field in the tree table changes
-   * @param e
-   */
-  onSelectionChange (e) {
-    this.setState(update(this.state, {selectedFile: {$set: e.selection}}))
+  toggleFolder (e) {
+    this.setState(update(this.state, {expandedKeys: {$set: e.value}}))
+  }
+
+  actionTemplate (node, column) {
+    const data = node.data
+
+    let alternative
+    const download = <Button onClick={e => this.onDownload(e, data)} icon='fa fa-fw fa-download' className='p-button-success' style={{marginRight: '.5em'}} />
+    if (data.type === 'file') {
+      alternative = <Button onClick={e => this.onViewFile(e, data)} icon='fa fa-fw fa-code' />
+    } else {
+      alternative = <Button onClick={e => this.onDelete(e, data)} icon='fa fa-fw fa-trash' className='p-button-danger' />
+    }
+
+    return <div>
+      {download}
+      {alternative}
+    </div>
   }
 
   render () {
-    const data = (this.state.history) ? this.state.history : []
-    let selected = 'None'
-
-    if (this.state.selectedFile) {
-      const name = this.state.selectedFile.data.name
-      const timestamp = this.state.selectedFile.data.timestamp
-
-      if (this.state.selectedFile.children) {
-        selected = name + '_' + timestamp
-      } else {
-        selected = name + ' (' + timestamp + ')'
-      }
-    }
-
-    const downloadDisabled = !(this.state.selectedFile)
-    // enable delete button only if selected element is parent folder (and thus has children)
-    const deleteDisabled = (this.state.selectedFile) ? !this.state.selectedFile.children : true
-
-    // enable the view button only if a single file with a text content [.xml, .cfg, .json] is selected
-    let viewDisabled = true
-    if (this.state.selectedFile && !this.state.selectedFile.children) {
-      const ext = this.state.selectedFile.data.name.split('.').pop()  // get the file extension
-      if (ext === 'cfg' || ext === 'xml' || ext === 'json') { viewDisabled = false }
-    }
-
     const dialogVisible = !!(this.state.content)
-    const header = (this.state.selectedFile) ? this.state.selectedFile.data.name : 'None'
     const content = (this.state.content) ? this.state.content : <i className='pi pi-spin pi-spinner' style={{'fontSize': '3em'}} />
 
     return (
       <div>
         <Growl ref={(el) => this.growl = el} />
 
-        <Dialog header={header} visible={dialogVisible} maximizable modal onHide={(e) => this.setState(update(this.state, {content: {$set: null}}))}>
-          <xmp>{content}</xmp>
+        <Dialog header={'File Preview'} visible={dialogVisible} onHide={(e) => this.setState(update(this.state, {content: {$set: null}}))}>
+          <InputTextarea rows={25} cols={80} value={content} />
         </Dialog>
 
-        <div className='ui-g-12 ui-md-1'>
-          <Button icon='fa fa-fw fa-download' type='button' disabled={downloadDisabled} onClick={this.onDownload} />
-        </div>
-        <div className='ui-g-12 ui-md-1'>
-          <Button icon='fa fa-fw fa-trash' type='button' disabled={deleteDisabled} onClick={this.onDelete} />
-        </div>
-        <div className='ui-g-12 ui-md-1'>
-          <Button icon='fa fa-fw fa-code' type='button' disabled={viewDisabled} onClick={this.onViewFile} />
-        </div>
-        <div className='ui-g-12 ui-md-12'>
-          Selected: {selected}
-        </div>
-        <div className='ui-g-12 ui-md-12'>
-          <TreeTable value={data} selectionMode='single' header='History' selectionChange={this.onSelectionChange}>
-            <Column field='name' header='Name' sortable />
+        <div className='p-col'>
+          <TreeTable value={this.state.nodes} onToggle={this.toggleFolder} expandedKeys={this.state.expandedKeys} >
+            <Column field='name' header='Name' sortable expander />
             <Column field='date' header='Date' sortable style={{textAlign: 'center', width: '40%'}} />
+            <Column body={this.actionTemplate} style={{textAlign: 'center', width: '8em'}} />
           </TreeTable>
         </div>
       </div>

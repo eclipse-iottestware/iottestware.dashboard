@@ -25,6 +25,7 @@ const fileHelper = require('../helpers/fileHelper')
 
 const ttcn3Start = (protocol, timestamp) => {
   const testsuite = testsuites(protocol)
+
   const configurarion = configurations.configUri(protocol, timestamp)
   const loggingPath = pathHelper.storagePath(protocol, timestamp)
   let ttyLog = ''

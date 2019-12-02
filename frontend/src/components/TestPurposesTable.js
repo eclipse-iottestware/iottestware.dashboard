@@ -83,7 +83,7 @@ export default class TestPurposesTable extends React.Component {
         <Growl ref={(el) => this.growl = el} />
         <DataTable value={this.state.testpurposes} expandedRows={this.state.expandedRows} onRowToggle={(e) => this.setState({expandedRows: e.data})}
           rowExpansionTemplate={this.rowExpansionTemplate}>
-          <Column expander style={{width: '2em'}} header={<i className={'fa fa-hashtag'} />} />
+          <Column expander style={{width: '2em', align: 'center'}} header={<i className={'fa fa-hashtag'} />} />
           <Column field='id' header='ID' />
           <Column field='objective' header='Objective' style={{width: '65%'}} />
         </DataTable>
