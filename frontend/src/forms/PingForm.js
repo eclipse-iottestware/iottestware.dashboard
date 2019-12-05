@@ -103,35 +103,16 @@ export default class PingForm extends React.Component {
 
   render () {
     return (
-      <div className='form'>
-        <Growl ref={(el) => this.growl = el} />
+      <div className='p-grid p-fluid'>
         <form onSubmit={event => { this.handleSubmit(event) }}>
-          <h3 className='first'>Host</h3>
-          <div className='ui-g ui-fluid'>
+          <div className='p-col-8'>
             <HostInput handleChange={this.handleChange} />
           </div>
-          <div className='ui-g ui-fluid'>
-            <div className='ui-g-12 ui-md-2'>
-              <Tooltip for={'#count'}
-                title='Ping count'
-                tooltipEvent='hover'
-                showDelay={1000}
-                hideDelay={500} />
-              <Spinner id='count' value={this.state.count} onChange={(e) => this.setState({state: e.value})} min={1} max={15} />
-            </div>
-            <div className='ui-g-12 ui-md-10'>
-              <Tooltip for={'#ifSelector'}
-                title='Available Network Interfaces'
-                tooltipEvent='hover'
-                showDelay={1000}
-                hideDelay={500} />
-              <Dropdown id='ifSelector' value={this.state.selectedInterface} options={this.state.interfaces} onChange={this.onInterfaceChange} style={{width: '200px'}} placeholder='Select Interface' optionLabel='name' />
-            </div>
+          <div className='p-col-2'>
+            <Spinner id='count' value={this.state.count} onChange={(e) => this.setState({state: e.value})} min={1} max={15} />
           </div>
-          <div className='ui-g ui-fluid'>
-            <div className='ui-g-12 ui-md-2'>
-              <Button icon='fa fa-play' label='Run' type='submit' />
-            </div>
+          <div className='p-md-2'>
+            <Button label='Ping' type='submit' />
           </div>
         </form>
       </div>

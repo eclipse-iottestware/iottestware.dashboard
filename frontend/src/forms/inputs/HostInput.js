@@ -31,18 +31,16 @@ export default class HostInput extends React.Component {
 
   render () {
     return (
-      <div className='p-col-12 p-md-6'>
-        <div className='p-inputgroup'>
-          <span className='p-inputgroup-addon'>
-            <i className='fa fa-server'
-              onClick={e => this.setDefaultValue(e, this.props.defaultValue, this.props.handleChange)} />
-          </span>
-          <InputText placeholder='Host'
-            tooltip='IP or Hostname'
-            value={this.props.value}
-            onChange={this.props.handleChange}
-            id={'host'} />
-        </div>
+      <div className='p-inputgroup'>
+        <span className='p-inputgroup-addon'>
+          <i className='fa fa-server'
+            onClick={e => this.setDefaultValue(e, this.props.defaultValue, this.props.handleChange)} />
+        </span>
+        <InputText placeholder='Host'
+          tooltip='IP or Hostname'
+          value={this.props.value}
+          onChange={this.props.handleChange}
+          id={'host'} />
       </div>
     )
   }
