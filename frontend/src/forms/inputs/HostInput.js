@@ -36,7 +36,7 @@ export default class HostInput extends React.Component {
           <i className='fa fa-server'
             onClick={e => this.setDefaultValue(e, this.props.defaultValue, this.props.handleChange)} />
         </span>
-        <InputText placeholder='Host'
+        <InputText placeholder='Target'
           tooltip='IP or Hostname'
           value={this.props.value}
           onChange={this.props.handleChange}

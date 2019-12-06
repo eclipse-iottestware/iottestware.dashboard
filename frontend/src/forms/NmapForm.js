@@ -12,29 +12,36 @@
  ********************************************************************************/
 import React from 'react'
 import {Button} from 'primereact/button'
+import {Dropdown} from 'primereact/dropdown'
 import {Growl} from 'primereact/growl'
 import HostInput from './inputs/HostInput'
 import update from 'immutability-helper'
 
+const scanProfiles = [
+  {label: 'Regular scan', value: 'regular_scan'},
+  {label: 'Ping scan', value: 'ping_scan'},
+  {label: 'Quick scan', value: 'quick_scan'},
+  // Quick Scan+ requires root privileges
+  //{label: 'Quick scan+', value: 'quick_scan_plus'},
+  //{label: 'Quick traceroute', value: 'quick_traceroute'},
+  {label: 'Intense scan', value: 'intense_scan'},
+  //{label: 'Intense scan + UDP', value: 'intense_scan_udp'},
+  {label: 'Intense scan, all TCP ports', value: 'intense_scan_all_tcp'},
+  {label: 'Intense scan, no ping', value: 'intense_scan_no_ping'}
+]
+
 export default class NmapForm extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {}
+    this.state = {
+      isReady: true,
+      target: 'gateway.local',
+      scanProfile: 'quick_scan'
+    }
 
-    this.handleChange = this.handleChange.bind(this)
+    this.handleTargetChange = this.handleTargetChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  handleChange (event) {
-    const target = event.target
-    const value = target.type === 'checkbox' ? target.checked : target.value
-    const name = target.id
-
-    let newInputState = update(this.state, {
-      [name]: {$set: value}
-    })
-
-    this.setState(newInputState)
+    this.onScanProfileChange = this.onScanProfileChange.bind(this)
   }
 
   handleSubmit (event) {
@@ -55,7 +62,7 @@ export default class NmapForm extends React.Component {
 
       return response.json()
     }).then(payload => {
-      console.log(payload.message)
+      //this.growl.show({severity: 'info', summary: 'Execute nmap', detail: payload.message})
       this.props.nextViewState()
     }).catch(error => {
       this.growl.show({severity: 'error', summary: 'Incorrect Input', detail: error.message})
@@ -65,19 +72,33 @@ export default class NmapForm extends React.Component {
     event.preventDefault()
   }
 
+  handleTargetChange (e) {
+    let target = e.target.value
+    this.setState({target: target})
+  }
+
+  onScanProfileChange (e) {
+    this.setState({scanProfile: e.value})
+  }
+
   render () {
     return (
-      <div className='form'>
+      <div className='p-grid, p-fluid'>
         <Growl ref={(el) => this.growl = el} />
         <form onSubmit={event => { this.handleSubmit(event) }}>
-          <h3 className='first'>Host</h3>
-          <div className='ui-g ui-fluid'>
-            <HostInput handleChange={this.handleChange} />
-          </div>
-          <div className='ui-g ui-fluid'>
-            <div className='ui-g-12 ui-md-2'>
-              <Button icon='fa fa-play' label='Run' type='submit' />
+          <div className='p-grid p-fluid'>
+            <h3>Scan Target</h3>
+            <div className='p-col-6'>
+              <HostInput handleChange={this.handleTargetChange} value={this.state.target} />
             </div>
+            <h3>Scan Profile</h3>
+            <div className='p-col-12 p-md-4'>
+              <Dropdown value={this.state.scanProfile} options={scanProfiles} onChange={(e) => { this.setState({scanProfile: e.value}) }} placeholder='Select a Scan Profile' />
+            </div>
+          </div>
+          <hr />
+          <div className='p-col-2'>
+            <Button icon='fa fa-play' label='Scan' type='submit' disabled={!this.state.isReady} />
           </div>
         </form>
       </div>

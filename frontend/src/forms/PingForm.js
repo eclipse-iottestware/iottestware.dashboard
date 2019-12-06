@@ -13,10 +13,7 @@
 import React from 'react'
 import update from 'immutability-helper'
 import {Button} from 'primereact/button'
-import {Growl} from 'primereact/growl'
-import {Tooltip} from 'primereact/tooltip'
 import {Spinner} from 'primereact/spinner'
-import {Dropdown} from 'primereact/dropdown'
 import HostInput from './inputs/HostInput'
 
 export default class PingForm extends React.Component {
