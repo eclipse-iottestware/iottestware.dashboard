@@ -115,11 +115,11 @@ export default class FileTreeTable extends React.Component {
   }
 
   onViewFile (e, data) {
-    const protocol = data.proto
+    const testsuite = data.testsuite
     const timestamp = data.timestamp
     const fileName = data.name
 
-    readHistoryFile(protocol, timestamp, fileName, (content) => {
+    readHistoryFile(testsuite, timestamp, fileName, (content) => {
       this.setState(update(this.state, {content: {$set: content}}))
     })
   }

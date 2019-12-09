@@ -34,7 +34,7 @@ router.get('/', function (req, res) {
     subdirs.forEach(sd => {
       const subdirectory = pathHelper.storagePath(d, sd)
       const files = fileHelper.directoryFiles(subdirectory)
-      const entry = {'id': sd, 'protocol': protocolNamings.readableProtocol(d), 'files': files}
+      const entry = {'id': sd, 'testsuite': protocolNamings.readableProtocol(d), 'files': files}
       ret.push(entry)
     })
   })
@@ -158,11 +158,10 @@ router.delete('/delete/:proto/:ts', function (req, res) {
 })
 
 
-
 /**
  * check and validate the parameters before proceed to the next route
  */
-router.use('/read/:proto/:ts/:filename', function (req, res, next) {
+router.use('/read/:proto/:ts/:filename', (req, res, next) => {
   const proto = protocolNamings.lowerCaseProtocol(req.params.proto)
   const timestamp = req.params.ts
   const filename = req.params.filename
@@ -222,7 +221,7 @@ router.get('/:proto', function (req, res) {
 
   dirs.forEach(d => {
     const files = fileHelper.directoryFiles(pathHelper.storagePath(proto, d))
-    const entry = {'id': d, 'protocol': protoName, 'files': files}
+    const entry = {'id': d, 'testsuite': protoName, 'files': files}
     ret.push(entry)
   })
   res.status(200).json({'testruns': ret})

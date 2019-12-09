@@ -65,7 +65,6 @@ export default class NmapView extends React.Component {
   }
 
   renderNmapReport () {
-    console.log('-> ' + JSON.stringify(this.state.nmapReport))
     const report = this.state.nmapReport.hosts.map(i => this.singleHost(i))
     return (
       <div>

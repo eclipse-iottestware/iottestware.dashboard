@@ -30,6 +30,9 @@ const readableProtocol = (param) => {
     case 'coap':
       output = 'CoAP'
       break
+    case 'nmap':
+      output = 'Nmap'
+      break
     case 'opc':
     case 'opcua':
     case 'opc-ua':
@@ -48,6 +51,7 @@ const readableProtocol = (param) => {
  * @param param is the name of the protocol
  * @returns protocol name as lowercase notation or null
  */
+// TODO: the whole module should be named testsuites or similar, not protocols!
 const lowerCaseProtocol = (param) => {
   param = param.toLowerCase()
   let output = null
@@ -58,6 +62,9 @@ const lowerCaseProtocol = (param) => {
       break
     case 'coap':
       output = 'coap'
+      break
+    case 'nmap':
+      output = 'nmap'
       break
     case 'opc':
     case 'opcua':

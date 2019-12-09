@@ -26,6 +26,9 @@ export const historyRequestURI = (protocol) => {
     case 'coap':
       endpoint = '/v1/history/coap'
       break
+    case 'nmap':
+      endpoint = '/v1/history/read/nmap'
+      break
     case 'opc':
     case 'opcua':
     case 'opc-ua':
@@ -55,6 +58,9 @@ export const historyDownloadURI = (protocol, timestamp, fileName) => {
     case 'coap':
       endpoint = '/v1/history/download/coap/' + fileId
       break
+    case 'nmap':
+      endpoint = '/v1/history/download/nmap/' + fileId
+      break
     case 'opc':
     case 'opcua':
     case 'opc-ua':
@@ -79,6 +85,9 @@ export const historyDeleteURI = (protocol, timestamp, fileName) => {
     case 'coap':
       endpoint = '/v1/history/delete/coap/' + fileId
       break
+    case 'nmap':
+      endpoint = '/v1/history/delete/nmap/' + fileId
+      break
     case 'opc':
     case 'opcua':
     case 'opc-ua':
@@ -102,6 +111,9 @@ export const historyReadFileURI = (protocol, timestamp, fileName) => {
       break
     case 'coap':
       endpoint = '/v1/history/read/coap/' + fileId
+      break
+    case 'nmap':
+      endpoint = '/v1/history/read/nmap/' + fileId
       break
     case 'opc':
     case 'opcua':

@@ -40,16 +40,16 @@ export const loadHistory = (protocol, callback) => {
               'date': date,
               'timestamp': folder.id,
               'type': 'file',
-              'proto': folder.protocol
+              'testsuite': folder.testsuite
             }
           }
           files.push(fileItem)
         })
 
         const folderItem = {
-          'key': folder.protocol + '_' + folder.id,
+          'key': folder.testsuite + '_' + folder.id,
           'data': {
-            'name': folder.protocol,
+            'name': folder.testsuite,
             'date': date,
             'timestamp': folder.id,
             'type': 'folder'
@@ -100,7 +100,7 @@ const downloadHistory = (endpoint, fileName) => {
     }).then(data => {
       FileSaver.saveAs(data, fileName)
     }).catch(error => {
-      //this.growl.show({severity: 'error', summary: 'Failure', detail: error.message})
+      // this.growl.show({severity: 'error', summary: 'Failure', detail: error.message})
       return error
     })
 }
@@ -122,8 +122,8 @@ export const deleteHistoryFolder = (protocol, timestamp, callback) => {
     })
 }
 
-export const readHistoryFile = (protocol, timestamp, fileName, callback) => {
-  const endpoint = historyReadFileURI(protocol, timestamp, fileName)
+export const readHistoryFile = (testsuite, timestamp, fileName, callback) => {
+  const endpoint = historyReadFileURI(testsuite, timestamp, fileName)
 
   fetch(endpoint, {method: 'GET'})
     .then(async response => {
