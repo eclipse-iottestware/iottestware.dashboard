@@ -1,0 +1,20 @@
+Starting Nmap 7.70 ( https://nmap.org ) at 2019-12-09 12:05 CET
+Nmap scan report for 10.10.64.61
+Host is up (0.00021s latency).
+PORT    STATE SERVICE
+8080/tcp open  http-proxy
+
+Nmap scan report for 10.10.64.62
+Host is up (0.0099s latency).
+Not shown: 998 closed ports
+PORT    STATE SERVICE VERSION
+53/tcp  open  domain?
+631/tcp open  ipp     CUPS 2.3
+|_http-server-header: CUPS/2.3 IPP/2.1
+
+Nmap scan report for 10.10.64.63
+Host is up (0.018s latency).
+All 1000 scanned ports on 10.10.64.63 are closed (967) or filtered (33)
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 4 IP addresses (3 hosts up) scanned in 156.77 seconds

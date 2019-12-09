@@ -18,6 +18,7 @@ const configurations = require('../configuration/configCreator')
 const EventEmitter = require('events')
 class TitanEmitter extends EventEmitter {}
 const titanEmitter = new TitanEmitter()
+
 const lineChecker = require('./lineChecker')
 
 const pathHelper = require('../helpers/pathHelper')

@@ -13,23 +13,77 @@
 import React from 'react'
 import NmapForm from '../forms/NmapForm'
 import Terminal from '../components/TerminalComponent'
+import {DataTable} from 'primereact/datatable'
+import {Column} from 'primereact/column'
 import ViewStateEnum from '../utils/ViewStateEnum'
+import io from 'socket.io-client'
 
 export default class NmapView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      viewState: ViewStateEnum.CONF
+      viewState: ViewStateEnum.CONF,
+      nmapReport: {
+        hosts: []
+      }
     }
 
     this.nextViewState = this.nextViewState.bind(this)
+  }
+
+  componentDidMount () {
+    const that = this
+    this.socket = io('/')
+    this.socket.on('nmap/report', function (newData) {
+      that.setState({
+        nmapReport: newData
+      })
+    })
+  }
+
+  componentWillUnmount () {
+    this.socket.close()
   }
 
   nextViewState () {
     this.setState({viewState: ViewStateEnum.RUN})
   }
 
+  singleHost (item) {
+    const ports = item.ports
+    return (
+      <div key={item.host}>
+        <h3>{item.host}</h3>
+        <DataTable value={ports}>
+          <Column field='port' header='Port' />
+          <Column field='transport' header='Transport' />
+          <Column field='state' header='State' />
+          <Column field='service' header='Service' />
+        </DataTable>
+      </div>
+    )
+  }
+
+  renderNmapReport () {
+    console.log('-> ' + JSON.stringify(this.state.nmapReport))
+    const report = this.state.nmapReport.hosts.map(i => this.singleHost(i))
+    return (
+      <div>
+        <Terminal title={'Nmap'} />
+        <hr />
+        {report}
+      </div>
+    )
+  }
+
   render () {
+    let r
+    if (this.state.viewState === ViewStateEnum.CONF) {
+      r = <NmapForm nextViewState={this.nextViewState} />
+    } else {
+      r = this.renderNmapReport()
+    }
+
     return (
       <div>
         <div className='content-section section-header section-header-small'>
@@ -37,11 +91,7 @@ export default class NmapView extends React.Component {
         </div>
 
         <div className='content-section section-content'>
-
-          {
-          (this.state.viewState === ViewStateEnum.CONF)
-            ? <NmapForm nextViewState={this.nextViewState} /> : <Terminal title={'Nmap'} />
-        }
+          { r }
         </div>
       </div>
     )
