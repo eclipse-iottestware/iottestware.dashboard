@@ -28,6 +28,11 @@ module.exports = function (io) {
    * This route does the checking of inputs coming from the user
    */
   router.use('/ping', function (req, res, next) {
+    if (req.body.host.length === 0 || !req.body.host.trim()) {
+      res.status(500).json({'message': 'Specify a Host'})
+      return
+    }
+
     if (!validator.isValidHost(req.body.host)) {
       res.status(500).json({'message': req.body.host + ' is an invalid Host'})
       return

@@ -15,17 +15,20 @@ import {Button} from 'primereact/button'
 import {Dropdown} from 'primereact/dropdown'
 import {Growl} from 'primereact/growl'
 import HostInput from './inputs/HostInput'
+import {InputSwitch} from 'primereact/inputswitch'
 import update from 'immutability-helper'
 
 const scanProfiles = [
   {label: 'Regular scan', value: 'regular_scan'},
   {label: 'Ping scan', value: 'ping_scan'},
   {label: 'Quick scan', value: 'quick_scan'},
+  {label: 'Quick scan, all TCP ports', value: 'quick_scan_plus'},
+  {label: 'Quick scan IoT', value: 'quick_scan_iot'},
   // Quick Scan+ requires root privileges
-  //{label: 'Quick scan+', value: 'quick_scan_plus'},
-  //{label: 'Quick traceroute', value: 'quick_traceroute'},
+  // {label: 'Quick scan+', value: 'quick_scan_plus'},
+  // {label: 'Quick traceroute', value: 'quick_traceroute'},
   {label: 'Intense scan', value: 'intense_scan'},
-  //{label: 'Intense scan + UDP', value: 'intense_scan_udp'},
+  // {label: 'Intense scan + UDP', value: 'intense_scan_udp'},
   {label: 'Intense scan, all TCP ports', value: 'intense_scan_all_tcp'},
   {label: 'Intense scan, no ping', value: 'intense_scan_no_ping'}
 ]
@@ -36,7 +39,8 @@ export default class NmapForm extends React.Component {
     this.state = {
       isReady: true,
       target: 'gateway.local',
-      scanProfile: 'quick_scan'
+      scanProfile: 'quick_scan',
+      skipHostDiscovery: false
     }
 
     this.handleTargetChange = this.handleTargetChange.bind(this)
@@ -62,8 +66,7 @@ export default class NmapForm extends React.Component {
 
       return response.json()
     }).then(payload => {
-      //this.growl.show({severity: 'info', summary: 'Execute nmap', detail: payload.message})
-      this.props.nextViewState()
+      this.props.nextViewState(payload.reason)
     }).catch(error => {
       this.growl.show({severity: 'error', summary: 'Incorrect Input', detail: error.message})
     })
@@ -95,9 +98,13 @@ export default class NmapForm extends React.Component {
             <div className='p-col-12 p-md-4'>
               <Dropdown value={this.state.scanProfile} options={scanProfiles} onChange={(e) => { this.setState({scanProfile: e.value}) }} placeholder='Select a Scan Profile' />
             </div>
+            <h3>Skip Host Discovery</h3>
+            <div className='p-col-12 p-md-4'>
+              <InputSwitch checked={this.state.skipHostDiscovery} onChange={(e) => this.setState({skipHostDiscovery: e.value})} tooltip='-Pn' />
+            </div>
           </div>
           <hr />
-          <div className='p-col-2'>
+          <div className='p-col-12 p-md-4'>
             <Button icon='fa fa-play' label='Scan' type='submit' disabled={!this.state.isReady} />
           </div>
         </form>

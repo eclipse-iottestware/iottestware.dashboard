@@ -23,34 +23,44 @@ const EventEmitter = require('events')
 class IoTNmapEmitter extends EventEmitter {}
 const nmapEmitter = new IoTNmapEmitter()
 
-const scanParams = (target, profile, timestamp) => {
+const scanParams = (target, profile, timestamp, flags) => {
   fileHelper.mkdirSync(pathHelper.storagePath('nmap', timestamp))
   const outputFile = pathHelper.storagePath('nmap', timestamp, 'nmap_scan')
 
   let p = ['-oA', outputFile]
   if (profile === 'ping_scan') {
-    p.push('-sn', '-Pn', target)
+    p.push('-sn', '-Pn')
   } else if (profile === 'quick_scan') {
-    p.push('-T4', '-F', target)
+    p.push('-T4', '-F')
+  } else if (profile === 'quick_scan_plus') {
+    p.push('-T4', '-p 1-65535')
+  } else if (profile === 'quick_scan_iot') {
+    // Note: only a guess for demo puposes (should capture mqtt, coap and opc-ua)
+    // what about -PO switch here?
+    p.push('-T4', '-p 1-10000')
     // Quick Scan+ / traceroute require root privileges
     // } else if (profile === 'quick_scan_plus') {
     //  p.push('-sV', '-T4', '-O', '-F', '--version-light', target)
     // } else if (profile === 'quick_traceroute') {
     //  p.push('-sn', '-traceroute', target)
   } else if (profile === 'intense_scan') {
-    p.push('-T4', '-A', '-v', target)
+    p.push('-T4', '-A', '-v')
     // UDP scan requires root privileges https://www.unix.com/ip-networking/248432-why-nmap-udp-need-root.html
     // } else if (profile === 'intense_scan_udp') {
     //  p.push('-sS', '-sU', '-T4', '-A', '-v', target)
   } else if (profile === 'intense_scan_all_tcp') {
-    p.push('-p 1-65535', '-T4', '-A', '-v', target)
+    p.push('-p 1-65535', '-T4', '-A', '-v')
   } else if (profile === 'intense_scan_no_ping') {
-    p.push('-T4', '-A', '-v', '-Pn', target)
-  } else {
-    // perform a regular scan
-    p.push(target)
+    p.push('-T4', '-A', '-v', '-Pn')
   }
 
+  if (flags.skipHostDiscovery && !p.find(e => e === '-Pn')) {
+    p.push('-Pn')
+  } else {
+    // do nothing
+  }
+
+  p.push(target)
   return p
 }
 
@@ -58,17 +68,18 @@ const scanParams = (target, profile, timestamp) => {
  * IoTnmap => like zenmap but for IoT-Testware
  */
 
-const scan = (target, profile) => {
+const scan = (target, profile, flags) => {
   const ts = timeStamp()
-  const params = scanParams(target, profile, ts)
+  const params = scanParams(target, profile, ts, flags)
   let proc = spawn('nmap', params)
 
-  // TODO: emit the raw command to FE
+  // Note: remove the -oA [path] switch for the FE
+  const shortCmd = 'nmap ' + params.slice(2).join(' ')
   const cmd = 'nmap ' + params.join(' ')
   nmapEmitter.emit('rawCommand', cmd)
 
   let report = null
-  let done = false
+  let done
   proc.stdout.on('data', (data) => {
     // split data line by line
     let lines = data.toString().split(/\r?\n/)
@@ -87,7 +98,7 @@ const scan = (target, profile) => {
     if (done) {
       console.log('##> REPORT: ' + JSON.stringify(report))
       // TODO: send out done/finish to FE?
-    }*/
+    } */
   })
 
   proc.on('error', (error) => {
@@ -103,7 +114,7 @@ const scan = (target, profile) => {
   })
 
   if (proc.pid) {
-    return [true, nmapEmitter]
+    return [true, nmapEmitter, shortCmd]
   } else {
     return [false, proc]
   }

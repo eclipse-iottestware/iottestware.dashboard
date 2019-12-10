@@ -15,6 +15,7 @@ import update from 'immutability-helper'
 import {Button} from 'primereact/button'
 import {Spinner} from 'primereact/spinner'
 import HostInput from './inputs/HostInput'
+import { Growl } from 'primereact/growl'
 
 export default class PingForm extends React.Component {
   constructor (props) {
@@ -23,6 +24,7 @@ export default class PingForm extends React.Component {
       count: 5,
       interval: 1,
       interfaces: [],
+      host: '',
       selectedInterface: null
     }
 
@@ -101,14 +103,18 @@ export default class PingForm extends React.Component {
   render () {
     return (
       <div className='p-grid p-fluid'>
+        <Growl ref={(el) => this.growl = el} />
         <form onSubmit={event => { this.handleSubmit(event) }}>
-          <div className='p-col-8'>
+          <h3>Ping Target</h3>
+          <div className='p-col-12 p-md-4'>
             <HostInput handleChange={this.handleChange} />
           </div>
-          <div className='p-col-2'>
-            <Spinner id='count' value={this.state.count} onChange={(e) => this.setState({state: e.value})} min={1} max={15} />
+          <h3>Ping Count</h3>
+          <div className='p-col-12 p-md-4'>
+            <Spinner id='count' value={this.state.count} onChange={(e) => this.setState({count: e.value})} min={1} max={15} tooltip='Stop after sending count ECHO_REQUEST packets' />
           </div>
-          <div className='p-md-2'>
+          <hr />
+          <div className='p-col-12 p-md-4'>
             <Button label='Ping' type='submit' />
           </div>
         </form>

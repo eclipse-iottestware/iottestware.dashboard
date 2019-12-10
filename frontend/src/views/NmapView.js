@@ -14,15 +14,18 @@ import React from 'react'
 import NmapForm from '../forms/NmapForm'
 import Terminal from '../components/TerminalComponent'
 import {DataTable} from 'primereact/datatable'
+import {InputText} from 'primereact/inputtext'
 import {Column} from 'primereact/column'
 import ViewStateEnum from '../utils/ViewStateEnum'
 import io from 'socket.io-client'
+import { Growl } from 'primereact/growl'
 
 export default class NmapView extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       viewState: ViewStateEnum.CONF,
+      nmapCmd: '',
       nmapReport: {
         hosts: []
       }
@@ -45,8 +48,11 @@ export default class NmapView extends React.Component {
     this.socket.close()
   }
 
-  nextViewState () {
+  nextViewState (nmapCmd) {
     this.setState({viewState: ViewStateEnum.RUN})
+    this.setState({nmapCmd: nmapCmd})
+
+    this.growl.show({severity: 'info', summary: 'Execute nmap', detail: nmapCmd})
   }
 
   singleHost (item) {
@@ -70,6 +76,12 @@ export default class NmapView extends React.Component {
       <div>
         <Terminal title={'Nmap'} />
         <hr />
+        <div className='p-grid p-fluid'>
+          <div className='p-col-6'>
+            <InputText value={this.state.nmapCmd} onChange={(e) => {}} disabled />
+          </div>
+        </div>
+        <hr />
         {report}
       </div>
     )
@@ -85,6 +97,7 @@ export default class NmapView extends React.Component {
 
     return (
       <div>
+        <Growl ref={(el) => this.growl = el} />
         <div className='content-section section-header section-header-small'>
           <h1>Nmap Tool</h1>
         </div>

@@ -36,17 +36,16 @@ module.exports = (socketIO) => {
   router.post('/scan', function (req, res, next) {
     const target = req.body.target
     const profile = req.body.scanProfile
+    const flags = {
+      skipHostDiscovery: req.body.skipHostDiscovery
+    }
 
-    const [status, nmapEmitter] = nmap.scan(target, profile)
+    const [status, nmapEmitter, cmd] = nmap.scan(target, profile, flags)
 
     if (status) {
       // TODO: response with the socket.io topic you gonna publish to, thus FE does not need to have static topics!
       // eslint-disable-next-line standard/object-curly-even-spacing
-      res.status(200).json({reason: 'running nmap scan for ' + target})
-
-      nmapEmitter.on('rawCommand', (cmd) => {
-        socketIO.sockets.emit('terminal', {'message': 'Nmap command', 'value': cmd})
-      })
+      res.status(200).json({reason: cmd})
 
       /* Define functions to process the events coming from Titan */
       // result event
