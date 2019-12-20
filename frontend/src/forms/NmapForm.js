@@ -38,7 +38,7 @@ export default class NmapForm extends React.Component {
     super(props)
     this.state = {
       isReady: true,
-      target: 'gateway.local',
+      target: 'localhost',
       scanProfile: 'quick_scan',
       skipHostDiscovery: false
     }
