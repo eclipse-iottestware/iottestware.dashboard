@@ -1,19 +1,16 @@
 #https://www.eclipse.org/forums/index.php/t/1094222/
-FROM eclipsetitan/titan-ubuntu:6.4.0
+FROM eclipsetitan/titan-ubuntu:7.2.0
 MAINTAINER Ferdinand Wolff
 LABEL description="IoT-Testware Image"
 
 USER root
 
 ## Prepare Node.js
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash
 
 
 ## PREPARE THE SYSTEM
-RUN apt-get update && sudo apt-get install -y apt-utils build-essential default-jdk libsctp-dev nmap tcpdump curl nodejs 
-
-## Update npm
-RUN npm i -g npm
+RUN apt-get update && sudo apt-get install -y apt-utils build-essential default-jdk libsctp-dev nmap tcpdump curl nodejs python
 
 # net-tools & iputils are only required for debugging and testing
 RUN apt-get -yqq install net-tools iputils-ping
