@@ -44,7 +44,7 @@
     "less-loader": "^4.1.0",
     "morgan": "^1.8.2",
     "nanoscroller": "^0.8.7",
-    "npm": "^6.1.0",
+    "npm": "^9.4.1",
     "pdfmake": "^0.1.36",
     "primeicons": "^2.0.0",
     "primereact": "3.3.2",
