@@ -39,7 +39,7 @@
     "http-errors": "~1.6.2",
     "i": "^0.3.6",
     "immutability-helper": "^2.6.6",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "less": "^3.7.0",
     "less-loader": "^4.1.0",
     "morgan": "^1.8.2",
